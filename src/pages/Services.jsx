@@ -19,9 +19,11 @@ import healthcareImg from '../assets/healthcare.jpg';
 import serviceCtaImg from '../assets/servicecta.jpg';
 import { useScrollToTop } from '../hooks/useScrollToTop';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Services() {
   const { theme } = useTheme();
+  const { language, isRTL } = useLanguage();
   const [activeTab, setActiveTab] = useState('all');
   const [hoveredService, setHoveredService] = useState(null);
   const [currentProcess, setCurrentProcess] = useState(0);
@@ -48,48 +50,96 @@ export default function Services() {
 const services = [
   {
     id: 1,
-    title: "Content Generation",
-    description: "AI-powered tools for generating high-quality written content, articles, blogs, and marketing copy to accelerate your creative process.",
+    title: {
+      english: "Content Generation",
+      arabic: "توليد المحتوى",
+      hebrew: "יצירת תוכן"
+    },
+    description: {
+      english: "AI-powered tools for generating high-quality written content, articles, blogs, and marketing copy to accelerate your creative process.",
+      arabic: "أدوات مدعومة بالذكاء الاصطناعي لإنشاء محتوى مكتوب عالي الجودة، مقالات، مدونات، ونسخ تسويقية لتسريع عملية الإبداع.",
+      hebrew: "כלים מבוססי AI ליצירת תוכן כתוב איכותי, מאמרים, בלוגים והעתק שיווקי להאצת תהליך היצירה שלך."
+    },
     icon: FaCode,
     path: "/services/content-generation",
     category: "creation"
   },
   {
     id: 2,
-    title: "Image & Design Tools",
-    description: "Create stunning visuals, graphics, and designs with AI-driven image editing and design platforms for professionals and creators.",
+    title: {
+      english: "Image & Design Tools",
+      arabic: "أدوات الصور والتصميم",
+      hebrew: "כלי תמונה ועיצוב"
+    },
+    description: {
+      english: "Create stunning visuals, graphics, and designs with AI-driven image editing and design platforms for professionals and creators.",
+      arabic: "أنشئ صورًا ورسومات وتصاميم مذهلة باستخدام منصات تحرير الصور والتصميم المدعومة بالذكاء الاصطناعي للمحترفين والمبدعين.",
+      hebrew: "צור ויזואלים, גרפיקה ועיצובים מדהימים עם פלטפורמות עריכת תמונה ועיצוב מבוססות AI למקצוענים ויוצרים."
+    },
     icon: FaMagic,
     path: "/services/image-design-tools",
     category: "design"
   },
   {
     id: 3,
-    title: "AI Chatbots & Virtual Assistants",
-    description: "Automate customer support and engagement with intelligent chatbots and virtual assistants that understand and respond naturally.",
+    title: {
+      english: "AI Chatbots & Virtual Assistants",
+      arabic: "دردشات الذكاء الاصطناعي والمساعدون الافتراضيون",
+      hebrew: "צ׳אטבוטים ועוזרים וירטואליים מבוססי AI"
+    },
+    description: {
+      english: "Automate customer support and engagement with intelligent chatbots and virtual assistants that understand and respond naturally.",
+      arabic: "أتمتة دعم العملاء والتفاعل معهم باستخدام دردشات ذكية ومساعدين افتراضيين يفهمون ويستجيبون بشكل طبيعي.",
+      hebrew: "הפוך את תמיכת הלקוחות והמעורבות לאוטומטית עם צ׳אטבוטים ועוזרים וירטואליים חכמים שמבינים ומגיבים באופן טבעי."
+    },
     icon: FaComments,
     path: "/services/ai-chatbots",
     category: "automation"
   },
   {
     id: 4,
-    title: "AI Code Assistants",
-    description: "Boost developer productivity with AI-powered code completion, review, and optimization tools for faster, smarter coding.",
+    title: {
+      english: "AI Code Assistants",
+      arabic: "مساعدو البرمجة بالذكاء الاصطناعي",
+      hebrew: "עוזרי קוד מבוססי AI"
+    },
+    description: {
+      english: "Boost developer productivity with AI-powered code completion, review, and optimization tools for faster, smarter coding.",
+      arabic: "عزز إنتاجية المطورين باستخدام أدوات إكمال الكود، المراجعة، والتحسين المدعومة بالذكاء الاصطناعي لبرمجة أسرع وأكثر ذكاءً.",
+      hebrew: "שפר את פרודוקטיביות המפתחים עם כלים להשלמת קוד, סקירה ואופטימיזציה מבוססי AI לקידוד מהיר וחכם יותר."
+    },
     icon: FaCode,
     path: "/services/ai-code-assistants",
     category: "development"
   },
   {
     id: 5,
-    title: "Data & Analytics",
-    description: "Unlock insights and make data-driven decisions with advanced analytics, forecasting, and visualization powered by AI.",
+    title: {
+      english: "Data & Analytics",
+      arabic: "البيانات والتحليلات",
+      hebrew: "נתונים ואנליטיקה"
+    },
+    description: {
+      english: "Unlock insights and make data-driven decisions with advanced analytics, forecasting, and visualization powered by AI.",
+      arabic: "اكتشف الرؤى واتخذ قرارات قائمة على البيانات باستخدام التحليلات المتقدمة، التنبؤات، والتصورات المدعومة بالذكاء الاصطناعي.",
+      hebrew: "גלה תובנות וקבל החלטות מונחות נתונים עם אנליטיקה מתקדמת, חיזוי והדמיה מבוססי AI."
+    },
     icon: FaChartLine,
     path: "/services/data-analytics",
     category: "analytics"
   },
   {
     id: 6,
-    title: "AI Voice & Video Tools",
-    description: "Transform audio and video content with AI-based voice synthesis, transcription, and video editing solutions.",
+    title: {
+      english: "AI Voice & Video Tools",
+      arabic: "أدوات الصوت والفيديو بالذكاء الاصطناعي",
+      hebrew: "כלי קול ווידאו מבוססי AI"
+    },
+    description: {
+      english: "Transform audio and video content with AI-based voice synthesis, transcription, and video editing solutions.",
+      arabic: "حوّل محتوى الصوت والفيديو باستخدام حلول تركيب الصوت، النسخ، وتحرير الفيديو المدعومة بالذكاء الاصطناعي.",
+      hebrew: "הפוך תוכן אודיו ווידאו עם פתרונות סינתזת קול, תמלול ועריכת וידאו מבוססי AI."
+    },
     icon: FaPlay,
     path: "/services/ai-voice-video-tools",
     category: "media"
@@ -128,7 +178,7 @@ const services = [
     : services.filter(service => service.category === activeTab);
 
   return (
-    <div className={`min-h-screen relative overflow-hidden ${theme === 'dark' ? 'bg-[#121212] text-white' : 'bg-gray-50 text-black'}`}>
+    <div className={`min-h-screen relative overflow-hidden ${theme === 'dark' ? 'bg-[#121212] text-white' : 'bg-gray-50 text-black'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Hero Section with Parallax Effect */}
       <section className="relative py-32 px-4 z-10 overflow-hidden min-h-[545px] flex flex-col items-center justify-center text-center">
       {/* Background Video */}
@@ -149,10 +199,18 @@ const services = [
              
           </div>
           <h1 className="font-extrabold mb-6 text-center text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight max-w-5xl">
-            Unlock the Power of AI for Your Business
+            {language === 'arabic'
+              ? 'اكتشف قوة الذكاء الاصطناعي لعملك'
+              : language === 'hebrew'
+              ? 'גלה את עוצמת הבינה המלאכותית לעסק שלך'
+              : 'Unlock the Power of AI for Your Business'}
           </h1>
           <p className="mb-8 text-center text-white text-lg max-w-2xl mx-auto">
-            Access a full range of intelligent AI solutions to streamline, enhance, and revolutionize your business operations.
+            {language === 'arabic'
+              ? 'احصل على مجموعة كاملة من حلول الذكاء الاصطناعي الذكية لتبسيط وتعزيز وتحويل عمليات عملك.'
+              : language === 'hebrew'
+              ? 'קבל מגוון מלא של פתרונות AI חכמים לייעול, שיפור ומהפכה של תהליכי העסק שלך.'
+              : 'Access a full range of intelligent AI solutions to streamline, enhance, and revolutionize your business operations.'}
           </p>
           <div className="flex justify-center w-full">
             <button
@@ -168,7 +226,11 @@ const services = [
                   'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'
               }}
             >
-              View All Services
+              {language === 'arabic'
+                ? 'عرض جميع الخدمات'
+                : language === 'hebrew'
+                ? 'הצג את כל השירותים'
+                : 'View All Services'}
             </button>
           </div>
       </div>
@@ -201,10 +263,12 @@ const services = [
                         'linear-gradient(to right, #63342e, #312525, #9a644a, #63342e, #312525)'
                     } : {}}
                   >
-                    {service.title}
+                    {service.title[language]}
                   </h3>
                 </div>
-                <p className={`text-base ${isGradient ? 'text-white' : 'text-white'} mb-2 relative z-10`}>{service.description}</p>
+                <p className={`text-base ${isGradient ? 'text-white' : 'text-white'} mb-2 relative z-10`}>
+                  {service.description[language]}
+                </p>
                 {/* Learn More button removed as requested */}
               </div>
             );
@@ -224,8 +288,12 @@ const services = [
       >
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <div className="text-white text-sm font-semibold mb-2 tracking-wider">PROCESS</div>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white">How It Works</h2>
+            <div className="text-white text-sm font-semibold mb-2 tracking-wider">
+              {language === 'arabic' ? 'العملية' : language === 'hebrew' ? 'תהליך' : 'PROCESS'}
+            </div>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white">
+              {language === 'arabic' ? 'كيف يعمل' : language === 'hebrew' ? 'איך זה עובד' : 'How It Works'}
+            </h2>
           </div>
           <div className="relative flex flex-col items-center">
             {/* Horizontal line */}
@@ -236,40 +304,80 @@ const services = [
                 <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
                   <FaRegHandshake className="text-white text-3xl" />
                 </div>
-                <div className="font-bold text-lg mb-1 text-center">Discovery & Planning</div>
-                <div className="text-xs text-center text-white">We understand your business and AI needs to create a tailored strategy.</div>
+                <div className="font-bold text-lg mb-1 text-center">
+                  {language === 'arabic' ? 'الاكتشاف والتخطيط' : language === 'hebrew' ? 'גילוי ותכנון' : 'Discovery & Planning'}
+                </div>
+                <div className="text-xs text-center text-white">
+                  {language === 'arabic'
+                    ? 'نفهم عملك واحتياجات الذكاء الاصطناعي لديك لإنشاء استراتيجية مخصصة.'
+                    : language === 'hebrew'
+                    ? 'אנו מבינים את העסק והצרכים שלך ב-AI כדי ליצור אסטרטגיה מותאמת.'
+                    : 'We understand your business and AI needs to create a tailored strategy.'}
+                </div>
               </div>
               {/* Step 2 */}
               <div className="flex flex-col items-center w-1/5">
                 <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
                   <FaPencilRuler className="text-white text-3xl" />
                 </div>
-                <div className="font-bold text-lg mb-1 text-center">Solution Design</div>
-                <div className="text-xs text-center text-white">We design custom AI solutions aligned with your business goals.</div>
+                <div className="font-bold text-lg mb-1 text-center">
+                  {language === 'arabic' ? 'تصميم الحلول' : language === 'hebrew' ? 'עיצוב פתרון' : 'Solution Design'}
+                </div>
+                <div className="text-xs text-center text-white">
+                  {language === 'arabic'
+                    ? 'نصمم حلول ذكاء اصطناعي مخصصة تتماشى مع أهداف عملك.'
+                    : language === 'hebrew'
+                    ? 'אנו מעצבים פתרונות AI מותאמים למטרות העסק שלך.'
+                    : 'We design custom AI solutions aligned with your business goals.'}
+                </div>
               </div>
               {/* Step 3 */}
               <div className="flex flex-col items-center w-1/5">
                 <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
                   <FaCogs className="text-white text-3xl" />
                 </div>
-                <div className="font-bold text-lg mb-1 text-center">Development & Integration</div>
-                <div className="text-xs text-center text-white">We build and integrate AI tools into your existing workflows.</div>
+                <div className="font-bold text-lg mb-1 text-center">
+                  {language === 'arabic' ? 'التطوير والتكامل' : language === 'hebrew' ? 'פיתוח ואינטגרציה' : 'Development & Integration'}
+                </div>
+                <div className="text-xs text-center text-white">
+                  {language === 'arabic'
+                    ? 'نبني ونُدمج أدوات الذكاء الاصطناعي في سير عملك الحالي.'
+                    : language === 'hebrew'
+                    ? 'אנו בונים ומשלבים כלי AI בתהליכי העבודה הקיימים שלך.'
+                    : 'We build and integrate AI tools into your existing workflows.'}
+                </div>
               </div>
               {/* Step 4 */}
               <div className="flex flex-col items-center w-1/5">
                 <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
                   <FaLaptopCode className="text-white text-3xl" />
                 </div>
-                <div className="font-bold text-lg mb-1 text-center">Testing & Optimization</div>
-                <div className="text-xs text-center text-white">We rigorously test and optimize for accuracy and performance.</div>
+                <div className="font-bold text-lg mb-1 text-center">
+                  {language === 'arabic' ? 'الاختبار والتحسين' : language === 'hebrew' ? 'בדיקות ואופטימיזציה' : 'Testing & Optimization'}
+                </div>
+                <div className="text-xs text-center text-white">
+                  {language === 'arabic'
+                    ? 'نختبر ونحسن بدقة لضمان الدقة والأداء.'
+                    : language === 'hebrew'
+                    ? 'אנו בודקים ומשפרים בקפדנות לדיוק וביצועים.'
+                    : 'We rigorously test and optimize for accuracy and performance.'}
+                </div>
               </div>
               {/* Step 5 */}
               <div className="flex flex-col items-center w-1/5">
                 <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
                   <FaRocket className="text-white text-3xl" />
                 </div>
-                <div className="font-bold text-lg mb-1 text-center">Launch & Support</div>
-                <div className="text-xs text-center text-white">We deploy your AI solution and provide ongoing support.</div>
+                <div className="font-bold text-lg mb-1 text-center">
+                  {language === 'arabic' ? 'الإطلاق والدعم' : language === 'hebrew' ? 'השקה ותמיכה' : 'Launch & Support'}
+                </div>
+                <div className="text-xs text-center text-white">
+                  {language === 'arabic'
+                    ? 'نطلق حل الذكاء الاصطناعي الخاص بك ونوفر الدعم المستمر.'
+                    : language === 'hebrew'
+                    ? 'אנו משיקים את פתרון ה-AI שלך ומספקים תמיכה שוטפת.'
+                    : 'We deploy your AI solution and provide ongoing support.'}
+                </div>
               </div>
             </div>
             {/* Dots on the line */}
@@ -295,9 +403,19 @@ const services = [
                   'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'
               }}
             >
-              Industries We Serve
+              {language === 'arabic'
+                ? 'الصناعات التي نخدمها'
+                : language === 'hebrew'
+                ? 'התעשיות שאנו משרתים'
+                : 'Industries We Serve'}
             </h2>
-            <p className={`text-lg max-w-3xl mx-auto ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-black'}`}>Our AI solutions empower a wide range of industries to innovate, automate, and grow. Explore the sectors we help transform with intelligent technology.</p>
+            <p className={`text-lg max-w-3xl mx-auto ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-black'}`}>
+              {language === 'arabic'
+                ? 'تمكن حلول الذكاء الاصطناعي لدينا مجموعة واسعة من الصناعات من الابتكار والأتمتة والنمو. استكشف القطاعات التي نساعد في تحويلها بالتكنولوجيا الذكية.'
+                : language === 'hebrew'
+                ? 'פתרונות ה-AI שלנו מעצימים מגוון רחב של תעשיות לחדש, לאוטומט ולצמוח. גלה את התחומים שאנו מסייעים לשנות עם טכנולוגיה חכמה.'
+                : 'Our AI solutions empower a wide range of industries to innovate, automate, and grow. Explore the sectors we help transform with intelligent technology.'}
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Top Left: Manufacturing */}
@@ -306,13 +424,23 @@ const services = [
               <div className="rounded-xl p-6 flex flex-col items-center justify-center shadow-lg min-w-[140px]" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
                 <span className="text-3xl font-bold text-white mb-2">01</span>
                 <FaIndustry className="text-white text-3xl mb-2" />
-                <span className="font-bold text-white text-lg">Manufacturing</span>
+                <span className="font-bold text-white text-lg">
+                  {language === 'arabic' ? 'التصنيع' : language === 'hebrew' ? 'ייצור' : 'Manufacturing'}
+                </span>
               </div>
               {/* Speech Bubble */}
               <div className="bg-white rounded-xl p-6 shadow-lg relative flex-1">
                 {/* Removed step label for cleaner look */}
-                <div className="text-gray-700 text-base mb-2">AI-powered robotics, predictive maintenance, and process optimization for factories and supply chains.</div>
-                <div className="text-black font-semibold">Increase Efficiency</div>
+                <div className="text-gray-700 text-base mb-2">
+                  {language === 'arabic'
+                    ? 'روبوتات مدعومة بالذكاء الاصطناعي، صيانة تنبؤية، وتحسين العمليات للمصانع وسلاسل التوريد.'
+                    : language === 'hebrew'
+                    ? 'רובוטיקה מבוססת AI, תחזוקה חזויה ואופטימיזציה של תהליכים למפעלים ושרשראות אספקה.'
+                    : 'AI-powered robotics, predictive maintenance, and process optimization for factories and supply chains.'}
+                </div>
+                <div className="text-black font-semibold">
+                  {language === 'arabic' ? 'زيادة الكفاءة' : language === 'hebrew' ? 'הגדל יעילות' : 'Increase Efficiency'}
+                </div>
                 {/* Speech bubble arrow */}
                 <div className="absolute left-[-16px] top-8 w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent border-r-white"></div>
               </div>
@@ -323,13 +451,23 @@ const services = [
               <div className="rounded-xl p-6 flex flex-col items-center justify-center shadow-lg min-w-[140px]" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
                 <span className="text-3xl font-bold text-white mb-2">02</span>
                 <FaHospital className="text-white text-3xl mb-2" />
-                <span className="font-bold text-white text-lg">Healthcare</span>
+                <span className="font-bold text-white text-lg">
+                  {language === 'arabic' ? 'الرعاية الصحية' : language === 'hebrew' ? 'בריאות' : 'Healthcare'}
+                </span>
               </div>
               {/* Speech Bubble */}
               <div className="bg-white rounded-xl p-6 shadow-lg relative flex-1">
                 {/* Removed step label for cleaner look */}
-                <div className="text-gray-700 text-base mb-2">AI for diagnostics, patient monitoring, medical imaging, and personalized treatment recommendations.</div>
-                <div className="text-black font-semibold">Improve Patient Outcomes</div>
+                <div className="text-gray-700 text-base mb-2">
+                  {language === 'arabic'
+                    ? 'الذكاء الاصطناعي للتشخيص، مراقبة المرضى، التصوير الطبي، وتوصيات العلاج المخصصة.'
+                    : language === 'hebrew'
+                    ? 'AI לאבחון, ניטור מטופלים, דימות רפואי והמלצות טיפול מותאמות אישית.'
+                    : 'AI for diagnostics, patient monitoring, medical imaging, and personalized treatment recommendations.'}
+                </div>
+                <div className="text-black font-semibold">
+                  {language === 'arabic' ? 'تحسين نتائج المرضى' : language === 'hebrew' ? 'שפר תוצאות מטופלים' : 'Improve Patient Outcomes'}
+                </div>
                 {/* Speech bubble arrow */}
                 <div className="absolute left-[-16px] top-8 w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent border-r-white"></div>
               </div>
@@ -340,13 +478,23 @@ const services = [
               <div className="rounded-xl p-6 flex flex-col items-center justify-center shadow-lg min-w-[140px]" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
                 <span className="text-3xl font-bold text-white mb-2">03</span>
                 <FaCommentDots className="text-white text-3xl mb-2" />
-                <span className="font-bold text-white text-lg">Communication</span>
+                <span className="font-bold text-white text-lg">
+                  {language === 'arabic' ? 'الاتصالات' : language === 'hebrew' ? 'תקשורת' : 'Communication'}
+                </span>
               </div>
               {/* Speech Bubble */}
               <div className="bg-white rounded-xl p-6 shadow-lg relative flex-1">
                 {/* Removed step label for cleaner look */}
-                <div className="text-gray-700 text-base mb-2">AI chatbots, virtual assistants, and automated customer support for seamless engagement.</div>
-                <div className="text-black font-semibold">Enhance Engagement</div>
+                <div className="text-gray-700 text-base mb-2">
+                  {language === 'arabic'
+                    ? 'دردشات ذكية، مساعدين افتراضيين، ودعم عملاء آلي لتفاعل سلس.'
+                    : language === 'hebrew'
+                    ? 'צ׳אטבוטים מבוססי AI, עוזרים וירטואליים ותמיכת לקוחות אוטומטית למעורבות חלקה.'
+                    : 'AI chatbots, virtual assistants, and automated customer support for seamless engagement.'}
+                </div>
+                <div className="text-black font-semibold">
+                  {language === 'arabic' ? 'تعزيز التفاعل' : language === 'hebrew' ? 'שפר מעורבות' : 'Enhance Engagement'}
+                </div>
                 {/* Speech bubble arrow */}
                 <div className="absolute left-[-16px] top-8 w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent border-r-white"></div>
               </div>
@@ -357,13 +505,23 @@ const services = [
               <div className="rounded-xl p-6 flex flex-col items-center justify-center shadow-lg min-w-[140px]" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
                 <span className="text-3xl font-bold text-white mb-2">04</span>
                 <FaEnvelope className="text-white text-3xl mb-2" />
-                <span className="font-bold text-white text-lg">Marketing</span>
+                <span className="font-bold text-white text-lg">
+                  {language === 'arabic' ? 'التسويق' : language === 'hebrew' ? 'שיווק' : 'Marketing'}
+                </span>
               </div>
               {/* Speech Bubble */}
               <div className="bg-white rounded-xl p-6 shadow-lg relative flex-1">
                 {/* Removed step label for cleaner look */}
-                <div className="text-gray-700 text-base mb-2">AI-driven email campaigns, personalized marketing, and automated notifications to grow your business.</div>
-                <div className="text-black font-semibold">Drive Growth</div>
+                <div className="text-gray-700 text-base mb-2">
+                  {language === 'arabic'
+                    ? 'حملات بريد إلكتروني مدفوعة بالذكاء الاصطناعي، تسويق مخصص، وإشعارات آلية لتنمية عملك.'
+                    : language === 'hebrew'
+                    ? 'קמפיינים בדוא"ל מבוססי AI, שיווק מותאם אישית והתראות אוטומטיות לצמיחת העסק שלך.'
+                    : 'AI-driven email campaigns, personalized marketing, and automated notifications to grow your business.'}
+                </div>
+                <div className="text-black font-semibold">
+                  {language === 'arabic' ? 'دفع النمو' : language === 'hebrew' ? 'הניע צמיחה' : 'Drive Growth'}
+                </div>
                 {/* Speech bubble arrow */}
                 <div className="absolute left-[-16px] top-8 w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent border-r-white"></div>
               </div>
@@ -383,15 +541,25 @@ const services = [
           </div>
           {/* Content Card */}
           <div className="bg-white p-8 shadow-xl border border-[#27bdb5] flex flex-col justify-center h-full" style={{borderTopRightRadius: '8rem', borderBottomLeftRadius: '8rem', borderTopLeftRadius: 0, borderBottomRightRadius: 0}}>
-            <div className="text-[#1de9b6] text-sm font-semibold mb-2 tracking-wider">OUR COMMITMENT</div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-[#0a2342] mb-6">Ethical AI & Privacy</h2>
-            <p className="text-lg leading-relaxed mb-4 text-gray-600">We believe in responsible AI development that prioritizes transparency, fairness, and data protection. Our commitment to ethical practices ensures trust and reliability in every solution we deliver.</p>
+            <div className="text-[#1de9b6] text-sm font-semibold mb-2 tracking-wider">
+              {language === 'arabic' ? 'التزامنا' : language === 'hebrew' ? 'המחויבות שלנו' : 'OUR COMMITMENT'}
+            </div>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[#0a2342] mb-6">
+              {language === 'arabic' ? 'الذكاء الاصطناعي الأخلاقي والخصوصية' : language === 'hebrew' ? 'בינה מלאכותית אתית ופרטיות' : 'Ethical AI & Privacy'}
+            </h2>
+            <p className="text-lg leading-relaxed mb-4 text-gray-600">
+              {language === 'arabic'
+                ? 'نؤمن بتطوير الذكاء الاصطناعي المسؤول الذي يعطي الأولوية للشفافية والعدالة وحماية البيانات. يضمن التزامنا بالممارسات الأخلاقية الثقة والموثوقية في كل حل نقدمه.'
+                : language === 'hebrew'
+                ? 'אנו מאמינים בפיתוח AI אחראי שמעדיף שקיפות, הוגנות והגנה על נתונים. המחויבות שלנו לאתיקה מבטיחה אמון ואמינות בכל פתרון.'
+                : 'We believe in responsible AI development that prioritizes transparency, fairness, and data protection. Our commitment to ethical practices ensures trust and reliability in every solution we deliver.'}
+            </p>
             <ul className="list-disc pl-5 text-gray-700 space-y-2">
-              <li>Enterprise-grade encryption & secure data handling</li>
-              <li>Bias-free AI development & regular audits</li>
-              <li>Transparent, explainable models</li>
-              <li>Compliance with GDPR, CCPA, and privacy laws</li>
-              <li>Human-centric, responsible innovation</li>
+              <li>{language === 'arabic' ? 'تشفير من الدرجة المؤسسية ومعالجة بيانات آمنة' : language === 'hebrew' ? 'הצפנה ברמה ארגונית וטיפול מאובטח בנתונים' : 'Enterprise-grade encryption & secure data handling'}</li>
+              <li>{language === 'arabic' ? 'تطوير ذكاء اصطناعي خالٍ من التحيز وتدقيقات منتظمة' : language === 'hebrew' ? 'פיתוח AI ללא הטיה ובדיקות סדירות' : 'Bias-free AI development & regular audits'}</li>
+              <li>{language === 'arabic' ? 'نماذج شفافة وقابلة للتفسير' : language === 'hebrew' ? 'מודלים שקופים וברורים' : 'Transparent, explainable models'}</li>
+              <li>{language === 'arabic' ? 'الامتثال لـ GDPR وCCPA وقوانين الخصوصية' : language === 'hebrew' ? 'עמידה ב-GDPR, CCPA וחוקי פרטיות' : 'Compliance with GDPR, CCPA, and privacy laws'}</li>
+              <li>{language === 'arabic' ? 'ابتكار مسؤول يركز على الإنسان' : language === 'hebrew' ? 'חדשנות אחראית וממוקדת אדם' : 'Human-centric, responsible innovation'}</li>
             </ul>
           </div>
         </div>
@@ -408,9 +576,21 @@ const services = [
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
                 color: 'transparent'
-              }}>Get Started with AI Today</span>
+              }}>
+                {language === 'arabic'
+                  ? 'ابدأ مع الذكاء الاصطناعي اليوم'
+                  : language === 'hebrew'
+                  ? 'התחל עם בינה מלאכותית היום'
+                  : 'Get Started with AI Today'}
+              </span>
             </h2>
-            <p className={`text-lg mb-6 leading-relaxed max-w-2xl ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>Ready to implement AI solutions? Our expert team will guide you through every step, from initial assessment to seamless integration and ongoing support. Whether you need chatbots, analytics, or automation, we deliver tailored recommendations for your business goals.</p>
+            <p className={`text-lg mb-6 leading-relaxed max-w-2xl ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>
+              {language === 'arabic'
+                ? 'هل أنت مستعد لتطبيق حلول الذكاء الاصطناعي؟ سيرشدك فريقنا الخبير في كل خطوة، من التقييم الأولي إلى التكامل السلس والدعم المستمر. سواء كنت بحاجة إلى روبوتات دردشة أو تحليلات أو أتمتة، نقدم توصيات مخصصة لأهداف عملك.'
+                : language === 'hebrew'
+                ? 'מוכן ליישם פתרונות AI? הצוות המומחה שלנו ילווה אותך בכל שלב, מהערכה ראשונית ועד אינטגרציה חלקה ותמיכה מתמשכת. בין אם אתה צריך צ׳אטבוטים, אנליטיקה או אוטומציה, אנו מספקים המלצות מותאמות למטרות העסק שלך.'
+                : 'Ready to implement AI solutions? Our expert team will guide you through every step, from initial assessment to seamless integration and ongoing support. Whether you need chatbots, analytics, or automation, we deliver tailored recommendations for your business goals.'}
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
               <button 
                 onClick={() => {
@@ -424,13 +604,21 @@ const services = [
                   background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'
                 }}
               >
-                Start Your AI Journey
+                {language === 'arabic'
+                  ? 'ابدأ رحلتك مع الذكاء الاصطناعي'
+                  : language === 'hebrew'
+                  ? 'התחל את מסע ה-AI שלך'
+                  : 'Start Your AI Journey'}
               </button>
               <button 
                 onClick={() => handleNavigation('/contact-us')}
                 className="bg-transparent border border-[rgb(59,28,10)] text-[rgb(59,28,10)] hover:bg-[rgb(59,28,10)] hover:text-white font-bold rounded-lg px-8 py-3 text-base shadow transition-colors w-full sm:w-auto"
               >
-                Contact Our Experts &rarr;
+                {language === 'arabic'
+                  ? 'تواصل مع خبرائنا'
+                  : language === 'hebrew'
+                  ? 'צור קשר עם המומחים שלנו'
+                  : 'Contact Our Experts'} &rarr;
               </button>
             </div>
           </div>

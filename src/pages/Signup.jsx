@@ -6,8 +6,51 @@ import { useTheme } from "../context/ThemeContext";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
 export default function Signup() {
-  const { theme, toggleTheme } = useTheme();
   const [language, setLanguage] = useState("english");
+  // Translations for English, Arabic, Hebrew
+  const translations = {
+    english: {
+      createAccount: "Create Account",
+      joinAs: "Join us as a",
+      firstName: "First Name",
+      lastName: "Last Name",
+      email: "Email",
+      password: "Password",
+      confirmPassword: "Confirm Password",
+      alreadyHaveAccount: "Already have an account?",
+      login: "Login",
+      admin: "Admin",
+      user: "User"
+    },
+    arabic: {
+      createAccount: "إنشاء حساب",
+      joinAs: "انضم إلينا كـ",
+      firstName: "الاسم الأول",
+      lastName: "اسم العائلة",
+      email: "البريد الإلكتروني",
+      password: "كلمة المرور",
+      confirmPassword: "تأكيد كلمة المرور",
+      alreadyHaveAccount: "هل لديك حساب بالفعل؟",
+      login: "تسجيل الدخول",
+      admin: "مسؤول",
+      user: "مستخدم"
+    },
+    hebrew: {
+      createAccount: "צור חשבון",
+      joinAs: "הצטרף אלינו כ",
+      firstName: "שם פרטי",
+      lastName: "שם משפחה",
+      email: "אימייל",
+      password: "סיסמה",
+      confirmPassword: "אשר סיסמה",
+      alreadyHaveAccount: "כבר יש לך חשבון?",
+      login: "התחבר",
+      admin: "מנהל",
+      user: "משתמש"
+    }
+  };
+  const t = translations[language];
+  const { theme, toggleTheme } = useTheme();
   const [showLangDropdown, setShowLangDropdown] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -124,6 +167,7 @@ export default function Signup() {
       <div className={`w-full md:w-1/2 flex flex-col justify-center items-center min-h-screen`}>
         <div
           className="w-full max-w-md p-8 border rounded-lg"
+          dir={(language === 'arabic' || language === 'hebrew') ? 'rtl' : 'ltr'}
           style={{
             background: theme === 'dark' ? 'rgba(26,26,26,0.95)' : 'rgba(255,255,255,0.85)',
             borderColor: theme === 'dark' ? '#333' : '#e5e7eb',
@@ -177,8 +221,8 @@ export default function Signup() {
 
           {/* Form Header */}
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: theme === 'dark' ? '#fff' : '#111' }}>Create Account</h2>
-            <p style={{ color: theme === 'dark' ? '#ccc' : '#555' }}>Join us as a {isAdmin ? "Admin" : "User"}</p>
+            <h2 className="text-2xl font-bold mb-4" style={{ color: theme === 'dark' ? '#fff' : '#111' }}>{t.createAccount}</h2>
+            <p style={{ color: theme === 'dark' ? '#ccc' : '#555' }}>{t.joinAs} {isAdmin ? t.admin : t.user}</p>
           </div>
 
           {/* Signup Form */}
@@ -186,7 +230,7 @@ export default function Signup() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium mb-2" style={{ color: theme === 'dark' ? '#fff' : '#333' }}>
-                  First Name
+                  {t.firstName}
                 </label>
                 <input
                   type="text"
@@ -195,14 +239,14 @@ export default function Signup() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors"
                   style={{ background: theme === 'dark' ? '#232323' : '#fff', color: theme === 'dark' ? '#fff' : '#111', borderColor: theme === 'dark' ? '#333' : '#d1d5db' }}
-                  placeholder="First name"
+                  placeholder={t.firstName}
                   required
                 />
                 {errors.firstName && <p className="text-xs text-red-500 mt-1">{errors.firstName}</p>}
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2" style={{ color: theme === 'dark' ? '#fff' : '#333' }}>
-                  Last Name
+                  {t.lastName}
                 </label>
                 <input
                   type="text"
@@ -211,7 +255,7 @@ export default function Signup() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors"
                   style={{ background: theme === 'dark' ? '#232323' : '#fff', color: theme === 'dark' ? '#fff' : '#111', borderColor: theme === 'dark' ? '#333' : '#d1d5db' }}
-                  placeholder="Last name"
+                  placeholder={t.lastName}
                   required
                 />
                 {errors.lastName && <p className="text-xs text-red-500 mt-1">{errors.lastName}</p>}
@@ -219,7 +263,7 @@ export default function Signup() {
             </div>
             <div>
               <label className="block text-sm font-medium mb-2" style={{ color: theme === 'dark' ? '#fff' : '#333' }}>
-                Email
+                {t.email}
               </label>
               <input
                 type="email"
@@ -228,14 +272,14 @@ export default function Signup() {
                 onChange={handleChange}
                 className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors"
                 style={{ background: theme === 'dark' ? '#232323' : '#fff', color: theme === 'dark' ? '#fff' : '#111', borderColor: theme === 'dark' ? '#333' : '#d1d5db' }}
-                placeholder="Email address"
+                placeholder={t.email}
                 required
               />
               {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium mb-2" style={{ color: theme === 'dark' ? '#fff' : '#333' }}>
-                Password
+                {t.password}
               </label>
               <input
                 type="password"
@@ -244,14 +288,14 @@ export default function Signup() {
                 onChange={handleChange}
                 className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors"
                 style={{ background: theme === 'dark' ? '#232323' : '#fff', color: theme === 'dark' ? '#fff' : '#111', borderColor: theme === 'dark' ? '#333' : '#d1d5db' }}
-                placeholder="Password"
+                placeholder={t.password}
                 required
               />
               {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium mb-2" style={{ color: theme === 'dark' ? '#fff' : '#333' }}>
-                Confirm Password
+                {t.confirmPassword}
               </label>
               <input
                 type="password"
@@ -260,7 +304,7 @@ export default function Signup() {
                 onChange={handleChange}
                 className="w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors"
                 style={{ background: theme === 'dark' ? '#232323' : '#fff', color: theme === 'dark' ? '#fff' : '#111', borderColor: theme === 'dark' ? '#333' : '#d1d5db' }}
-                placeholder="Confirm password"
+                placeholder={t.confirmPassword}
                 required
               />
               {errors.confirmPassword && <p className="text-xs text-red-500 mt-1">{errors.confirmPassword}</p>}
@@ -273,16 +317,16 @@ export default function Signup() {
                 : { background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)', color: '#fff' }
               }
             >
-              Create Account
+              {t.createAccount}
             </button>
           </form>
 
           {/* Login Link */}
             <div className="text-center mt-6">
               <p className="text-gray-600">
-                Already have an account?{" "}
+                {t.alreadyHaveAccount} {" "}
                 <Link to="/" className="hover:underline text-blue-600">
-                  Login
+                  {t.login}
                 </Link>
               </p>
             </div>

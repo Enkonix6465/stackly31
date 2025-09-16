@@ -160,7 +160,6 @@ export default function Welcome() {
         backgroundRepeat: 'no-repeat',
         width: '100vw',
         height: '100vh',
-        direction: (language === 'arabic' || language === 'hebrew') ? 'rtl' : 'ltr',
       }}
     >
       {/* Left side (empty or transparent) */}
@@ -169,6 +168,7 @@ export default function Welcome() {
       <div className="flex-1 flex items-center justify-center">
         <div
           className="w-full max-w-xs p-6 border rounded-lg shadow-lg"
+          dir={(language === 'arabic' || language === 'hebrew') ? 'rtl' : 'ltr'}
           style={{
             background: theme === 'dark'
               ? '#000'

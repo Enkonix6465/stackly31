@@ -1,5 +1,6 @@
        
 import React, { useRef, useState, useEffect } from "react";
+import { useLanguage } from "../context/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import heroVideo from "../assets/SecondHome/home2.mp4";
 import aiChatbotImg from "../assets/ai chatbots & assistants1.webp";
@@ -62,6 +63,7 @@ function ExpertCard({ img, name, title, bio }) {
 }
 
 const SecondHome = () => {
+  const { language, isRTL, translations } = useLanguage();
   const { theme } = useTheme();
   const navigate = useNavigate();
   const webinarCarouselRef = useRef(null);
@@ -175,27 +177,75 @@ const SecondHome = () => {
   // Webinar data for the calendar grid
   const webinarData = [
     {
-      date: "June 28, 2024",
-      title: "AI in Action: Transforming Business Operations",
-       time: "4:00 PM GMT",
+      date: {
+        english: "June 28, 2024",
+        arabic: "٢٨ يونيو ٢٠٢٤",
+        hebrew: "28 ביוני 2024"
+      },
+      title: {
+        english: "AI in Action: Transforming Business Operations",
+        arabic: "الذكاء الاصطناعي في العمل: تحويل العمليات التجارية",
+        hebrew: "בינה מלאכותית בפעולה: שינוי תהליכים עסקיים"
+      },
+      time: {
+        english: "4:00 PM GMT",
+        arabic: "٤:٠٠ مساءً بتوقيت غرينتش",
+        hebrew: "16:00 שעון גריניץ'"
+      },
       image: aiChatbotImg
     },
     {
-      date: "July 12, 2024",
-      title: "NLP for Business: Unlocking Language Data",
-       time: "3:00 PM GMT",
+      date: {
+        english: "July 12, 2024",
+        arabic: "١٢ يوليو ٢٠٢٤",
+        hebrew: "12 ביולי 2024"
+      },
+      title: {
+        english: "NLP for Business: Unlocking Language Data",
+        arabic: "معالجة اللغة الطبيعية للأعمال: فتح بيانات اللغة",
+        hebrew: "NLP לעסקים: פתיחת נתוני שפה"
+      },
+      time: {
+        english: "3:00 PM GMT",
+        arabic: "٣:٠٠ مساءً بتوقيت غرينتش",
+        hebrew: "15:00 שעון גריניץ'"
+      },
       image: workflowImg
     },
     {
-      date: "July 26, 2024",
-      title: "Automation & Workflow Tools in Practice",
-       time: "5:00 PM GMT",
+      date: {
+        english: "July 26, 2024",
+        arabic: "٢٦ يوليو ٢٠٢٤",
+        hebrew: "26 ביולי 2024"
+      },
+      title: {
+        english: "Automation & Workflow Tools in Practice",
+        arabic: "أدوات الأتمتة وسير العمل في التطبيق",
+        hebrew: "כלי אוטומציה וזרימת עבודה בפועל"
+      },
+      time: {
+        english: "5:00 PM GMT",
+        arabic: "٥:٠٠ مساءً بتوقيت غرينتش",
+        hebrew: "17:00 שעון גריניץ'"
+      },
       image: dataAnalysisImg
     },
     {
-      date: "August 9, 2024",
-      title: "Data Analysis & Forecasting with AI",
-       time: "2:00 PM GMT",
+      date: {
+        english: "August 9, 2024",
+        arabic: "٩ أغسطس ٢٠٢٤",
+        hebrew: "9 באוגוסט 2024"
+      },
+      title: {
+        english: "Data Analysis & Forecasting with AI",
+        arabic: "تحليل البيانات والتنبؤ باستخدام الذكاء الاصطناعي",
+        hebrew: "ניתוח נתונים וחיזוי עם בינה מלאכותית"
+      },
+      time: {
+        english: "2:00 PM GMT",
+        arabic: "٢:٠٠ مساءً بتوقيت غرينتش",
+        hebrew: "14:00 שעון גריניץ'"
+      },
       image: customAIImg
     },
     // Add more webinars as needed
@@ -248,6 +298,13 @@ const SecondHome = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const carouselEvents = webinarData;
 
+    // Translation strings for section
+    const sectionTitles = {
+      english: { future: "Future", events: "Events", register: "Register Now" },
+      arabic: { future: "الفعاليات", events: "القادمة", register: "سجل الآن" },
+      hebrew: { future: "אירועים", events: "קרובים", register: "הרשם עכשיו" },
+    };
+    const t = sectionTitles[language] || sectionTitles.english;
 
     // Auto-advance every 3 seconds
     useEffect(() => {
@@ -276,14 +333,20 @@ const SecondHome = () => {
       return index;
     };
 
+    // RTL style for section
+    const sectionDir = isRTL ? "rtl" : "ltr";
+
     return (
-      <section className="pt-20 pb-0 px-0 w-full" style={{ background: 'linear-gradient(135deg, #63342e 0%, #c58d6a 100%)' }}>
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-12 text-center w-full">Future <span className="text-[#19e6f7]">Events</span></h2>
+      <section className="pt-20 pb-0 px-0 w-full" style={{ background: 'linear-gradient(135deg, #63342e 0%, #c58d6a 100%)' }} dir={sectionDir}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-12 text-center w-full">
+          {t.future} <span className="text-[#19e6f7]">{t.events}</span>
+        </h2>
         <div className="relative flex items-center justify-center w-full">
           {/* Left Arrow */}
           <button 
             onClick={prevSlide}
             className="absolute left-4 z-20 w-12 h-12 bg-[#19e6f7] rounded-full flex items-center justify-center text-white shadow-lg hover:bg-[#0a3a4a] transition-colors duration-300"
+            aria-label={language === 'arabic' ? 'السابق' : language === 'hebrew' ? 'הקודם' : 'Previous'}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -294,6 +357,7 @@ const SecondHome = () => {
           <button 
             onClick={nextSlide}
             className="absolute right-4 z-20 w-12 h-12 bg-[#19e6f7] rounded-full flex items-center justify-center text-white shadow-lg hover:bg-[#0a3a4a] transition-colors duration-300"
+            aria-label={language === 'arabic' ? 'التالي' : language === 'hebrew' ? 'הבא' : 'Next'}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -315,15 +379,15 @@ const SecondHome = () => {
                 </div>
                 <div className="w-full h-[50%] p-3 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-white font-bold text-sm mb-2">{carouselEvents[getCardIndex(-1)].title}</h3>
-                    <p className="text-[#19e6f7] text-xs mb-2">{carouselEvents[getCardIndex(-1)].date} • {carouselEvents[getCardIndex(-1)].time}</p>
+                    <h3 className="text-white font-bold text-sm mb-2">{carouselEvents[getCardIndex(-1)].title[language]}</h3>
+                    <p className="text-[#19e6f7] text-xs mb-2">{carouselEvents[getCardIndex(-1)].date[language]} • {carouselEvents[getCardIndex(-1)].time[language]}</p>
                   </div>
                   <button 
                     onClick={() => handleRegisterClick(carouselEvents[getCardIndex(-1)].title)}
                     className="inline-block font-bold text-base px-6 py-3 rounded-lg shadow-lg transition text-white hover:scale-105 text-center border-2 border-white" 
                     style={{background: 'linear-gradient(135deg, #63342e 0%, #c58d6a 100%)', boxShadow: '0 4px 16px #63342e55'}}
                   >
-                    Register Now
+                    {t.register}
                   </button>
                 </div>
               </div>
@@ -342,8 +406,8 @@ const SecondHome = () => {
                 </div>
                 <div className="w-full h-[50%] p-4 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-white font-bold text-lg mb-2">{carouselEvents[currentIndex].title}</h3>
-                    <p className="text-[#19e6f7] text-sm mb-2">{carouselEvents[currentIndex].date} • {carouselEvents[currentIndex].time}</p>
+                    <h3 className="text-white font-bold text-lg mb-2">{carouselEvents[currentIndex].title[language]}</h3>
+                    <p className="text-[#19e6f7] text-sm mb-2">{carouselEvents[currentIndex].date[language]} • {carouselEvents[currentIndex].time[language]}</p>
                     <p className="text-[#bfc1be] text-sm">{carouselEvents[currentIndex].description}</p>
                   </div>
                   <button 
@@ -351,7 +415,7 @@ const SecondHome = () => {
                     className="inline-block font-bold text-base px-8 py-3 rounded-lg shadow-lg transition text-white text-center hover:scale-105 border-2 border-white" 
                     style={{background: 'linear-gradient(135deg, #63342e 0%, #c58d6a 100%)', boxShadow: '0 4px 16px #63342e55'}}
                   >
-                    Register Now
+                    {t.register}
                   </button>
                 </div>
               </div>
@@ -370,15 +434,15 @@ const SecondHome = () => {
                 </div>
                 <div className="w-full h-[50%] p-3 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-white font-bold text-sm mb-2">{carouselEvents[getCardIndex(1)].title}</h3>
-                    <p className="text-[#19e6f7] text-xs mb-2">{carouselEvents[getCardIndex(1)].date} • {carouselEvents[getCardIndex(1)].time}</p>
+                    <h3 className="text-white font-bold text-sm mb-2">{carouselEvents[getCardIndex(1)].title[language]}</h3>
+                    <p className="text-[#19e6f7] text-xs mb-2">{carouselEvents[getCardIndex(1)].date[language]} • {carouselEvents[getCardIndex(1)].time[language]}</p>
                   </div>
                   <button 
                     onClick={() => handleRegisterClick(carouselEvents[getCardIndex(1)].title)}
                     className="inline-block font-bold text-base px-6 py-3 rounded-lg shadow-lg transition text-white hover:scale-105 text-center border-2 border-white" 
                     style={{background: 'linear-gradient(135deg, #63342e 0%, #c58d6a 100%)', boxShadow: '0 4px 16px #63342e55'}}
                   >
-                    Register Now
+                    {t.register}
                   </button>
                 </div>
               </div>
@@ -392,7 +456,7 @@ const SecondHome = () => {
 
 
   return (
-    <div className={`${theme === "dark" ? "bg-[#121212] text-white" : "bg-[#121212]  text-black"}`}>
+  <div className={`${theme === "dark" ? "bg-[#121212] text-white" : "bg-[#121212]  text-black"}`} dir={isRTL ? "rtl" : "ltr"}>
       {/* 1. Hero/Intro Section */}
      <section
   className="relative text-white py-12 shadow-2xl overflow-hidden w-full px-4 md:px-8 lg:px-16 min-h-[700px] flex items-center justify-center bg-[#121212]"
@@ -422,17 +486,31 @@ const SecondHome = () => {
             color: 'transparent',
             fontWeight: 'bold',
             display: 'inline-block',
-          }}>AI Solutions</span>
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight whitespace-nowrap text-white">Transform Your Workflow with <span style={{
-            background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            color: 'transparent',
-            fontWeight: 'bold',
-            display: 'inline-block',
-          }}>AI</span></h1>
-          <h2 className="text-2xl md:text-2xl font-semibold mb-6 text-white">Unlock the potential of cutting-edge artificial intelligence to streamline processes, boost insights, and speed up growth.</h2>
+          }}>{language === "arabic" ? "حلول الذكاء الاصطناعي" : language === "hebrew" ? "פתרונות בינה מלאכותית" : "AI Solutions"}</span>
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight whitespace-nowrap text-white">
+            <span style={{
+              background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              color: 'transparent',
+              fontWeight: 'bold',
+              display: 'inline-block',
+            }}>
+              {language === "arabic"
+                ? "حوّل سير عملك مع الذكاء الاصطناعي"
+                : language === "hebrew"
+                ? "שנה את זרימת העבודה שלך עם בינה מלאכותית"
+                : "Transform Your Workflow with AI"}
+            </span>
+          </h1>
+          <h2 className="text-2xl md:text-2xl font-semibold mb-6 text-white">
+            {language === "arabic"
+              ? "اكتشف إمكانيات الذكاء الاصطناعي المتقدم لتبسيط العمليات، وتعزيز الرؤى، وتسريع النمو."
+              : language === "hebrew"
+              ? "גלה את הפוטנציאל של בינה מלאכותית מתקדמת לייעול תהליכים, שיפור תובנות והאצת הצמיחה."
+              : "Unlock the potential of cutting-edge artificial intelligence to streamline processes, boost insights, and speed up growth."}
+          </h2>
            <button 
             onClick={() => handleNavigation('/contact-us')}
             className="inline-block px-10 py-4 rounded-full font-bold text-lg text-white hover:scale-105 transition-transform duration-300"
@@ -440,7 +518,7 @@ const SecondHome = () => {
               background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
               marginBottom: '0.5rem'
             }}>
-            Get Started Free
+            {language === "arabic" ? "ابدأ مجانًا" : language === "hebrew" ? "התחל בחינם" : "Get Started Free"}
           </button>
         </div>
       </section>
@@ -448,38 +526,90 @@ const SecondHome = () => {
       <section className="py-20 px-4" style={{ background: '#f7f3ed' }}>
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4" style={{ color: '#3b1c0a' }}>
-            Why Choose Us
+            {language === "arabic" ? "لماذا تختارنا" : language === "hebrew" ? "למה לבחור בנו" : "Why Choose Us"}
           </h2>
           <p className="text-lg text-center mb-10" style={{ color: '#3b1c0a', maxWidth: 600 }}>
-            Discover how our AI-powered platform helps businesses automate tasks, gain insights, and collaborate smarter. Our features are designed for productivity, security, and growth.
+            {language === "arabic"
+              ? "اكتشف كيف تساعد منصتنا المدعومة بالذكاء الاصطناعي الشركات على أتمتة المهام، واكتساب الرؤى، والتعاون بشكل أكثر ذكاءً. ميزاتنا مصممة للإنتاجية والأمان والنمو."
+              : language === "hebrew"
+              ? "גלה כיצד הפלטפורמה שלנו מבוססת AI מסייעת לעסקים לאוטומט משימות, לקבל תובנות ולשתף פעולה בצורה חכמה יותר. התכונות שלנו נועדו לפרודוקטיביות, אבטחה וצמיחה."
+              : "Discover how our AI-powered platform helps businesses automate tasks, gain insights, and collaborate smarter. Our features are designed for productivity, security, and growth."}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full" style={{ maxWidth: 1100 }}>
             <div className="rounded-2xl shadow-lg overflow-hidden bg-white flex flex-col justify-end min-h-[220px] relative" style={{ gridColumn: 'span 2', background: 'linear-gradient(90deg, #e7dbc7 60%, #fff 100%)' }}>
               <img src={aiChatbotImg} alt="Cutting-Edge AI Technology" className="absolute inset-0 w-full h-full object-cover opacity-70" />
               <div className="relative z-10 p-6">
-                <h3 className="font-bold text-lg mb-2" style={{ color: '#3b1c0a' }}>Cutting-Edge AI Technology</h3>
-                <p className="text-sm" style={{ color: '#3b1c0a' }}>Powered by the latest machine learning and generative AI models to deliver accurate, reliable results.</p>
+                <h3 className="font-bold text-lg mb-2" style={{ color: '#3b1c0a' }}>
+                  {language === "arabic"
+                    ? "تقنية الذكاء الاصطناعي المتقدمة"
+                    : language === "hebrew"
+                    ? "טכנולוגיית AI מתקדמת"
+                    : "Cutting-Edge AI Technology"}
+                </h3>
+                <p className="text-sm" style={{ color: '#3b1c0a' }}>
+                  {language === "arabic"
+                    ? "مدعومة بأحدث نماذج التعلم الآلي والذكاء الاصطناعي التوليدي لتقديم نتائج دقيقة وموثوقة."
+                    : language === "hebrew"
+                    ? "מופעל על ידי מודלים מתקדמים של למידת מכונה ו-AI גנרטיבי לתוצאות מדויקות ואמינות."
+                    : "Powered by the latest machine learning and generative AI models to deliver accurate, reliable results."}
+                </p>
               </div>
             </div>
             <div className="rounded-2xl shadow-lg bg-[#ede9e3] flex flex-col justify-end min-h-[220px] relative overflow-hidden">
               <img src={workflowImg} alt="User-Friendly & Intuitive" className="absolute inset-0 w-full h-full object-cover opacity-60" />
               <div className="relative z-10 p-6">
-                <h3 className="font-bold text-lg mb-2" style={{ color: '#3b1c0a' }}>User-Friendly & Intuitive</h3>
-                <p className="text-sm" style={{ color: '#3b1c0a' }}>No tech expertise required — our tools are designed for everyone, from beginners to professionals.</p>
+                <h3 className="font-bold text-lg mb-2" style={{ color: '#3b1c0a' }}>
+                  {language === "arabic"
+                    ? "سهل الاستخدام وبديهي"
+                    : language === "hebrew"
+                    ? "ידידותי למשתמש ואינטואיטיבי"
+                    : "User-Friendly & Intuitive"}
+                </h3>
+                <p className="text-sm" style={{ color: '#3b1c0a' }}>
+                  {language === "arabic"
+                    ? "لا حاجة للخبرة التقنية — أدواتنا مصممة للجميع، من المبتدئين إلى المحترفين."
+                    : language === "hebrew"
+                    ? "אין צורך בידע טכנולוגי — הכלים שלנו מתאימים לכולם, ממתחילים ועד מקצוענים."
+                    : "No tech expertise required — our tools are designed for everyone, from beginners to professionals."}
+                </p>
               </div>
             </div>
             <div className="rounded-2xl shadow-lg bg-[#e7dbc7] flex flex-col justify-end min-h-[220px] relative overflow-hidden">
               <img src={dataAnalysisImg} alt="All-in-One Platform" className="absolute inset-0 w-full h-full object-cover opacity-60" />
               <div className="relative z-10 p-6">
-                <h3 className="font-bold text-lg mb-2" style={{ color: '#3b1c0a' }}>All-in-One Platform</h3>
-                <p className="text-sm" style={{ color: '#3b1c0a' }}>Access multiple AI solutions (content, design, analytics, chat, voice, code) in one place.</p>
+                <h3 className="font-bold text-lg mb-2" style={{ color: '#3b1c0a' }}>
+                  {language === "arabic"
+                    ? "منصة شاملة"
+                    : language === "hebrew"
+                    ? "פלטפורמה כוללת"
+                    : "All-in-One Platform"}
+                </h3>
+                <p className="text-sm" style={{ color: '#3b1c0a' }}>
+                  {language === "arabic"
+                    ? "الوصول إلى حلول الذكاء الاصطناعي المتعددة (المحتوى، التصميم، التحليلات، الدردشة، الصوت، البرمجة) في مكان واحد."
+                    : language === "hebrew"
+                    ? "גישה למגוון פתרונות AI (תוכן, עיצוב, אנליטיקה, צ'אט, קול, קוד) במקום אחד."
+                    : "Access multiple AI solutions (content, design, analytics, chat, voice, code) in one place."}
+                </p>
               </div>
             </div>
             <div className="rounded-2xl shadow-lg overflow-hidden bg-white flex flex-col justify-end min-h-[220px] relative" style={{ gridColumn: 'span 2', background: 'linear-gradient(90deg, #e7dbc7 60%, #fff 100%)' }}>
               <img src={customAIImg} alt="Trusted by Professionals Worldwide" className="absolute inset-0 w-full h-full object-cover opacity-60" />
               <div className="relative z-10 p-6">
-                <h3 className="font-bold text-lg mb-2" style={{ color: '#3b1c0a' }}>Trusted by Professionals Worldwide</h3>
-                <p className="text-sm" style={{ color: '#3b1c0a' }}>Used by content creators, developers, marketers, and businesses across industries.</p>
+                <h3 className="font-bold text-lg mb-2" style={{ color: '#3b1c0a' }}>
+                  {language === "arabic"
+                    ? "موثوق به من قبل المحترفين حول العالم"
+                    : language === "hebrew"
+                    ? "נמצא בשימוש מקצוענים ברחבי העולם"
+                    : "Trusted by Professionals Worldwide"}
+                </h3>
+                <p className="text-sm" style={{ color: '#3b1c0a' }}>
+                  {language === "arabic"
+                    ? "يستخدمه منشئو المحتوى والمطورون والمسوقون والشركات في مختلف الصناعات."
+                    : language === "hebrew"
+                    ? "בשימוש יוצרי תוכן, מפתחים, משווקים ועסקים במגוון תחומים."
+                    : "Used by content creators, developers, marketers, and businesses across industries."}
+                </p>
               </div>
             </div>
           </div>
@@ -669,8 +799,44 @@ const SecondHome = () => {
                 <div key={idx} style={style} className="flex flex-col items-center p-6">
                   <img src={expert.img} alt={expert.name} className="w-full h-56 object-cover rounded-xl mb-4" />
                   <div className="text-center">
-                    <div className="font-bold text-lg mb-1" style={{color: '#3b1c0a'}}>{expert.name}</div>
-                    <div className="text-base mb-1" style={{color: '#c58d6a'}}>{expert.title}</div>
+                    <div className="font-bold text-lg mb-1" style={{color: '#3b1c0a'}}>
+                      {language === "arabic"
+                        ? expert.name === "Dr. Alex Carter" ? "د. أليكس كارتر"
+                          : expert.name === "Priya Singh" ? "بريا سينغ"
+                          : expert.name === "Miguel Torres" ? "ميغيل توريس"
+                          : expert.name === "Linda Zhao" ? "ليندا تشاو"
+                          : expert.name === "Ethan Kim" ? "إيثان كيم"
+                          : expert.name === "Sofia Müller" ? "صوفيا مولر"
+                          : expert.name
+                        : language === "hebrew"
+                          ? expert.name === "Dr. Alex Carter" ? "ד\"ר אלכס קרטר"
+                            : expert.name === "Priya Singh" ? "פריה סינג"
+                            : expert.name === "Miguel Torres" ? "מיגל טורס"
+                            : expert.name === "Linda Zhao" ? "לינדה ז'או"
+                            : expert.name === "Ethan Kim" ? "אית'ן קים"
+                            : expert.name === "Sofia Müller" ? "סופיה מולר"
+                            : expert.name
+                          : expert.name}
+                    </div>
+                    <div className="text-base mb-1" style={{color: '#c58d6a'}}>
+                      {language === "arabic"
+                        ? expert.title === "Lead AI Scientist" ? "كبير علماء الذكاء الاصطناعي"
+                          : expert.title === "Chief Data Officer" ? "رئيس قسم البيانات"
+                          : expert.title === "AI Solutions Architect" ? "مهندس حلول الذكاء الاصطناعي"
+                          : expert.title === "Data Science Lead" ? "قائد علوم البيانات"
+                          : expert.title === "AI Product Manager" ? "مدير منتجات الذكاء الاصطناعي"
+                          : expert.title === "Cloud AI Engineer" ? "مهندس الذكاء الاصطناعي السحابي"
+                          : expert.title
+                        : language === "hebrew"
+                          ? expert.title === "Lead AI Scientist" ? "מדען ראשי בתחום הבינה המלאכותית"
+                            : expert.title === "Chief Data Officer" ? "מנהל נתונים ראשי"
+                            : expert.title === "AI Solutions Architect" ? "ארכיטקט פתרונות AI"
+                            : expert.title === "Data Science Lead" ? "ראש תחום מדעי הנתונים"
+                            : expert.title === "AI Product Manager" ? "מנהל מוצרי AI"
+                            : expert.title === "Cloud AI Engineer" ? "מהנדס AI בענן"
+                            : expert.title
+                          : expert.title}
+                    </div>
                   </div>
                 </div>
               );
@@ -683,14 +849,55 @@ const SecondHome = () => {
       <section className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-black leading-tight">Empowering Businesses<br />with AI Solutions</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-black leading-tight">
+              {language === "arabic"
+                ? "تمكين الشركات بالحلول الذكية للذكاء الاصطناعي"
+                : language === "hebrew"
+                ? "מעצימים עסקים עם פתרונות AI"
+                : <>Empowering Businesses<br />with AI Solutions</>}
+            </h2>
           </div>
           <div>
-            <p className="mb-6 text-black text-lg">From intelligent automation to advanced analytics, our platform helps companies streamline operations, boost productivity, and unlock new growth opportunities.</p>
-            <button className="px-6 py-3 rounded font-semibold text-white" style={{background: 'linear-gradient(to right, #63342e, #c58d6a)'}}>Learn More About Us</button>
+            <p className="mb-6 text-black text-lg">
+              {language === "arabic"
+                ? "من الأتمتة الذكية إلى التحليلات المتقدمة، تساعد منصتنا الشركات على تبسيط العمليات، وزيادة الإنتاجية، وفتح فرص نمو جديدة."
+                : language === "hebrew"
+                ? "מאוטומציה חכמה ועד אנליטיקה מתקדמת, הפלטפורמה שלנו עוזרת לחברות לייעל תהליכים, לשפר פרודוקטיביות ולפתוח הזדמנויות צמיחה חדשות."
+                : "From intelligent automation to advanced analytics, our platform helps companies streamline operations, boost productivity, and unlock new growth opportunities."}
+            </p>
+            <button className="px-6 py-3 rounded font-semibold text-white" style={{background: 'linear-gradient(to right, #63342e, #c58d6a)'}}>
+              {language === "arabic" ? "تعرف أكثر علينا" : language === "hebrew" ? "למידע נוסף עלינו" : "Learn More About Us"}
+            </button>
           </div>
         </div>
-        <ImpactMetricsNumbers />
+        <ImpactMetricsNumbers
+          labels={{
+            clientSatisfaction:
+              language === "arabic"
+                ? "رضا العملاء"
+                : language === "hebrew"
+                ? "שביעות רצון לקוחות"
+                : "Client Satisfaction",
+            yearsExperience:
+              language === "arabic"
+                ? "سنوات خبرة الذكاء الاصطناعي"
+                : language === "hebrew"
+                ? "שנות ניסיון ב-AI"
+                : "Years of AI Experience",
+            businessClients:
+              language === "arabic"
+                ? "عملاء الأعمال"
+                : language === "hebrew"
+                ? "לקוחות עסקיים"
+                : "Business Clients",
+            projectsDelivered:
+              language === "arabic"
+                ? "مشاريع الذكاء الاصطناعي المنجزة"
+                : language === "hebrew"
+                ? "פרויקטי AI שסופקו"
+                : "AI Projects Delivered"
+          }}
+        />
       </section>
 
       {/* Upcoming Webinars Section (Slideshow) */}
@@ -702,8 +909,20 @@ const SecondHome = () => {
       {/* CTA Section  */}
       <section className="w-full pt-8 pb-16 px-4 flex flex-col items-center justify-center">
         <div className="max-w-3xl w-full flex flex-col items-center text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white">Ready to Transform Your Business?</h2>
-          <p className="text-lg text-white mb-8">Unlock the power of AI-driven automation, analytics, and workflow tools. Start your journey to smarter, faster, and more efficient operations today.</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white">
+            {language === "arabic"
+              ? "هل أنت مستعد لتحويل عملك؟"
+              : language === "hebrew"
+              ? "מוכן לשנות את העסק שלך?"
+              : "Ready to Transform Your Business?"}
+          </h2>
+          <p className="text-lg text-white mb-8">
+            {language === "arabic"
+              ? "اكتشف قوة الأتمتة والتحليلات وأدوات سير العمل المدعومة بالذكاء الاصطناعي. ابدأ رحلتك نحو عمليات أكثر ذكاءً وسرعة وكفاءة اليوم."
+              : language === "hebrew"
+              ? "גלה את כוח האוטומציה, האנליטיקה וכלי העבודה מבוססי AI. התחל את המסע שלך לפעילות חכמה, מהירה ויעילה יותר כבר היום."
+              : "Unlock the power of AI-driven automation, analytics, and workflow tools. Start your journey to smarter, faster, and more efficient operations today."}
+          </p>
           <button
             onClick={() => handleNavigation('/contact-us')}
             className="inline-block px-10 py-4 rounded-full font-bold text-lg text-white shadow-lg hover:scale-105 transition-transform duration-300"
@@ -713,7 +932,7 @@ const SecondHome = () => {
               marginBottom: '0.5rem'
             }}
           >
-            Get Started Free
+            {language === "arabic" ? "ابدأ مجانًا" : language === "hebrew" ? "התחל בחינם" : "Get Started Free"}
           </button>
         </div>
       </section>

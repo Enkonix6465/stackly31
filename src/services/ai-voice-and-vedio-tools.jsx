@@ -1,17 +1,22 @@
 import { motion } from "framer-motion";
 import heroVideo from "../assets/content.mp4";
 import { useTheme } from "../context/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
 import howItWorksImg from '../assets/Content & Code Generation1.webp';
 import agentImg from '../assets/Content & Code Generation2.png';
-import { FaRegHandshake, FaPencilRuler, FaCogs, FaLaptopCode, FaRocket } from 'react-icons/fa';
+import { FaMicrophone, FaVideo, FaLanguage, FaCommentDots, FaRocket } from 'react-icons/fa';
+// import { FaRegHandshake, FaPencilRuler, FaCogs, FaLaptopCode, FaRocket } from 'react-icons/fa';
 import blogCatTools from '../assets/blog-cat-tools.png';
 import blogCatTrends from '../assets/blog-cat-trends.png';
 import blogCatTutorial from '../assets/blog-cat-tutorial.png';
 import blogCatCase from '../assets/blog-cat-case.png';
 import blogCatIndustry from '../assets/blog-cat-industry.png';
 import blogCatThought from '../assets/blog-cat-thought.png';
-
-
+import voiceOverIcon from '../assets/blog-cat-tools.png';
+import podcastIcon from '../assets/blog-cat-trends.png';
+import educationIcon from '../assets/blog-cat-tutorial.png';
+import accessibilityIcon from '../assets/blog-cat-case.png';
+import marketingIcon from '../assets/blog-cat-thought.png';
 // Global styles for animations and effects
 const styleSheet = `
   @keyframes wave {
@@ -43,7 +48,7 @@ const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, tra
 const staggerContainer = { hidden: {}, visible: { transition: { staggerChildren: 0.15 } } };
 
 // 1. HERO SECTION
-const HeroSection = ({ theme }) => (
+const HeroSection = ({ theme, translations }) => (
   <motion.section
     initial="hidden"
     whileInView="visible"
@@ -63,12 +68,11 @@ const HeroSection = ({ theme }) => (
     <div className="bg-black bg-opacity-60 absolute inset-0"></div>
     <div className="relative z-10 pt-20">
         <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-bold mb-6 text-white">
-          AI Code Assistants
+          {translations.da_heroTitle || "AI Voice & Video Tools"}
         </motion.h1>
       <motion.p variants={fadeUp} className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-8">
-        Boost your development workflow with AI-powered code assistants. Instantly generate, review, and optimize code for any language or framework.
+        {translations.da_heroDesc || "Transform your communication and content creation with advanced AI voice and video solutions. Instantly generate lifelike voiceovers, automate video editing, and reach global audiences with real-time translation and dubbing."}
       </motion.p>
-       
       <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
           <button 
             onClick={() => {
@@ -87,7 +91,7 @@ const HeroSection = ({ theme }) => (
               border: 'none',
             }}
           >
-            Explore Features
+            {translations.da_exploreFeatures || "Explore Features"}
           </button>
       </motion.div>
     </div>
@@ -95,12 +99,12 @@ const HeroSection = ({ theme }) => (
 );
 
 // 2. HOW IT WORKS SECTION
-const HowItWorksSection = ({ theme }) => (
+const HowItWorksSection = ({ theme, translations }) => (
   <section className={`w-full py-24 px-4 ${theme === 'dark' ? 'bg-[#111211]' : 'bg-gray-100'}`}>
     <div className="max-w-5xl mx-auto">
       <div className="text-center mb-16">
-        <div className="text-[#312525] text-sm font-semibold mb-2 tracking-wider">PROCESS</div>
-        <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>How It Works</h2>
+  <div className="text-[#312525] text-sm font-semibold mb-2 tracking-wider">{translations.da_process || "PROCESS"}</div>
+  <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{translations.da_howItWorks || "How It Works"}</h2>
       </div>
       <div className="relative flex flex-col items-center">
         {/* Horizontal line */}
@@ -109,43 +113,38 @@ const HowItWorksSection = ({ theme }) => (
           {/* Step 1 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
-              <FaRegHandshake className="text-white text-3xl" />
+              <FaMicrophone className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Describe Your Coding Task</div>
-            <div className="text-xs text-center text-gray-600">Tell the assistant what you want to build, fix, or learn.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.da_step1 || "Voice Synthesis"}</div>
+           </div>
           {/* Step 2 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
-              <FaPencilRuler className="text-white text-3xl" />
+              <FaVideo className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Get Code Suggestions</div>
-            <div className="text-xs text-center text-gray-600">Receive instant code snippets, explanations, and best practices.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.da_step2 || "Video Editing"}</div>
+           </div>
           {/* Step 3 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
-              <FaCogs className="text-white text-3xl" />
+              <FaLanguage className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Edit & Refine</div>
-            <div className="text-xs text-center text-gray-600">Modify, test, and improve code with AI-powered reviews and debugging.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.da_step3 || "Translation & Dubbing"}</div>
+           </div>
           {/* Step 4 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
-              <FaLaptopCode className="text-white text-3xl" />
+              <FaCommentDots className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Learn & Automate</div>
-            <div className="text-xs text-center text-gray-600">Get explanations, documentation, and automate repetitive coding tasks.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.da_step4 || "Speech Recognition"}</div>
+           </div>
           {/* Step 5 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
               <FaRocket className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Deploy & Share</div>
-            <div className="text-xs text-center text-gray-600">Export your code, share with your team, and deploy with confidence.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.da_step5 || "Publish & Support"}</div>
+           </div>
         </div>
         {/* Dots on the line */}
         <div className="absolute top-16 left-0 w-full flex justify-between px-8" style={{zIndex:1}}>
@@ -159,30 +158,26 @@ const HowItWorksSection = ({ theme }) => (
 );
 
 // 3. KEY FEATURES & BENEFITS SECTION (modern card layout)
-const FeaturesBenefitsSection = ({ theme }) => {
+const FeaturesBenefitsSection = ({ theme, translations }) => {
   const features = [
-    { title: 'Sentiment Analysis' },
-    { title: 'Named Entity Recognition' },
-    { title: 'Text Summarization' },
-    { title: 'Language Translation' },
-    { title: 'Topic Modeling' },
-    { title: 'Conversational AI' }
+    { title: translations.da_feature1 || 'Voice Cloning & Customization' },
+    { title: translations.da_feature2 || 'AI Video Enhancement' },
+    { title: translations.da_feature3 || 'Speech Recognition' },
+    { title: translations.da_feature4 || 'Text-to-Speech & Speech-to-Text' },
+    { title: translations.da_feature5 || 'Real-Time Translation' },
+    { title: translations.da_feature6 || 'Easy Integration' }
   ];
   return (
-    <section id="features-section" className="w-full h-full pt-0 pb-0 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
+  <section id="features-section" className="w-full h-full pt-0 pb-0 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-0 items-center relative z-10 -space-x-8">
         <div className="flex-1 flex flex-col justify-center items-start mb-10 md:mb-0 md:pr-8">
-          <h2 className={`text-4xl md:text-5xl font-extrabold mb-2 mt-0 ${theme === 'dark' ? 'text-black' : 'text-white'}`}> Features & benefits</h2>
-          <p className={`text-xl mb-6 max-w-lg ${theme === 'dark' ? 'text-white' : 'text-white'}`}>Unlock the power of Natural Language Processing 
-            Enhance your applications with intelligent language features for business, research, and communication.
-          </p>
+          <h2 className={`text-4xl md:text-5xl font-extrabold mb-2 mt-0 ${theme === 'dark' ? 'text-black' : 'text-white'}`}>{translations.da_featuresTitle || "Features & Benefits"}</h2>
+           <p className={`text-xl mb-6 max-w-lg ${theme === 'dark' ? 'text-white' : 'text-white'}`}>{translations.da_featuresDesc || "Our AI voice and video tools empower you to create professional-grade audio and video content, automate editing, and reach global audiences with real-time translation and dubbing.\n\nExperience seamless integration, intuitive controls, and scalable solutions for creators, educators, and businesses."}</p>
           <ul className={`list-disc pl-5 text-lg mb-8 space-y-2 ${theme === 'dark' ? 'text-white' : 'text-white'}`}>
-            <li>Text classification and sentiment analysis</li>
-            <li>Named entity recognition and extraction</li>
-            <li>Text summarization and keyword extraction</li>
-            <li>Language translation and multilingual support</li>
-            <li>Conversational AI and chatbots</li>
-            <li>Intent detection and topic modeling</li>
+            <li>{translations.da_benefit1 || "Produce lifelike voiceovers and narrations"}</li>
+            <li>{translations.da_benefit2 || "Automate video editing and enhancement"}</li>
+            <li>{translations.da_benefit3 || "Convert speech to text and vice versa"}</li>
+            <li>{translations.da_benefit4 || "Expand your reach with instant translation"}</li>
           </ul>
         </div>
         <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 gap-8 w-full pt-20 pb-20 justify-items-center">
@@ -207,27 +202,27 @@ const FeaturesBenefitsSection = ({ theme }) => {
 // 4. BENEFITS SECTION (modern two-column layout)
 
 // 6. REAL LIFE USE CASES & APPLICATIONS SECTION
-const UseCasesSection = ({ theme }) => {
+const UseCasesSection = ({ theme, translations }) => {
   const useCases = [
     {
-      icon: blogCatTools,
-      title: 'Code Generation',
-      desc: 'Quickly generate code snippets, functions, and modules for any project.'
+      icon: voiceOverIcon,
+      title: translations.da_usecase1_title || 'Voiceovers for Videos',
+      desc: translations.da_usecase1_desc || 'Create professional voiceovers for explainer videos, ads, and presentations.'
     },
     {
-      icon: blogCatTrends,
-      title: 'Code Review',
-      desc: 'Automate code reviews and get instant feedback on quality and security.'
+      icon: podcastIcon,
+      title: translations.da_usecase2_title || 'Podcast Production',
+      desc: translations.da_usecase2_desc || 'Automate editing and enhancement for podcasts and audio shows.'
     },
     {
-      icon: blogCatCase,
-      title: 'Bug Fixing',
-      desc: 'Detect and fix bugs automatically with AI-powered suggestions.'
+      icon: educationIcon,
+      title: translations.da_usecase3_title || 'E-Learning Content',
+      desc: translations.da_usecase3_desc || 'Generate narration and video lessons for online courses.'
     },
     {
-      icon: blogCatThought,
-      title: 'Documentation',
-      desc: 'Generate and update code documentation instantly.'
+      icon: accessibilityIcon,
+      title: translations.da_usecase4_title || 'Accessibility Solutions',
+      desc: translations.da_usecase4_desc || 'Convert speech to text and provide real-time translation for accessibility.'
     }
   ];
 
@@ -236,11 +231,10 @@ const UseCasesSection = ({ theme }) => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-left">
           <h2 className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
-            Real-Life Use Cases & Applications
+            {translations.da_usecasesTitle || "Real-Life Use Cases & Applications"}
           </h2>
-          <p className="text-lg text-white max-w-2xl mb-8 leading-relaxed">
-            Discover how generative AI is transforming content creation for businesses, educators, and creators.<br />
-            Our platform adapts to your needs, delivering quality and speed for any use case.
+           <p className="text-lg text-white max-w-2xl mb-8 leading-relaxed">
+            {translations.da_usecasesDesc || "See how AI voice and video tools are revolutionizing content creation, communication, and accessibility for creators, educators, and businesses.\nOur platform adapts to your needs, delivering quality and speed for any use case."}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -260,64 +254,62 @@ const UseCasesSection = ({ theme }) => {
 };
 
 // 7. PRICING SECTION
-const PricingSection = ({ theme }) => {
-const plans = [
+const PricingSection = ({ theme, translations }) => {
+  const plans = [
     {
-      name: "Starter",
-      price: "$49",
-      period: "/month",
-      desc: "For individuals & freelancers",
+      name: translations.da_pricing_starter || "Starter",
+      price: "$39",
+      period: translations.da_pricing_month || "/month",
+      desc: translations.da_pricing_starter_desc || "For creators & individuals",
       features: [
-        "Basic Content Generation",
-        "Up to 500 outputs/month",
-        "Email Support",
-        "Standard Templates",
-        "Basic Collaboration"
+        translations.da_pricing_starter_f1 || "Basic Voice Synthesis",
+        translations.da_pricing_starter_f2 || "Simple Video Editing",
+        translations.da_pricing_starter_f3 || "Up to 100 projects/month",
+        translations.da_pricing_starter_f4 || "Email Support"
       ],
       popular: false
     },
     {
-      name: "Professional",
-      price: "$149",
-      period: "/month",
-      desc: "For teams & businesses",
+      name: translations.da_pricing_professional || "Professional",
+      price: "$129",
+      period: translations.da_pricing_month || "/month",
+      desc: translations.da_pricing_professional_desc || "For teams & businesses",
       features: [
-        "Advanced Content Generation",
-        "Unlimited outputs",
-        "Priority Support",
-        "Custom Templates",
-        "Real-Time Collaboration",
-        "API Access"
+        translations.da_pricing_professional_f1 || "Advanced Voice & Video Tools",
+        translations.da_pricing_professional_f2 || "Unlimited projects",
+        translations.da_pricing_professional_f3 || "Priority Support",
+        translations.da_pricing_professional_f4 || "Real-Time Translation",
+        translations.da_pricing_professional_f5 || "API Access",
+        translations.da_pricing_professional_f6 || "Collaboration Features"
       ],
       popular: true
     },
     {
-      name: "Enterprise",
-      price: "Custom",
+      name: translations.da_pricing_enterprise || "Enterprise",
+      price: translations.da_pricing_enterprise_price || "Custom",
       period: "",
-      desc: "For large organizations",
+      desc: translations.da_pricing_enterprise_desc || "For large organizations",
       features: [
-        "Custom AI Models",
-        "Dedicated Account Manager",
-        "24/7 Phone Support",
-        "On-premise Option",
-        "Advanced Security",
-        "SLA Guarantee",
-        "Custom Integrations"
+        translations.da_pricing_enterprise_f1 || "Custom AI Models",
+        translations.da_pricing_enterprise_f2 || "Dedicated Account Manager",
+        translations.da_pricing_enterprise_f3 || "24/7 Phone Support",
+        translations.da_pricing_enterprise_f4 || "On-premise Option",
+        translations.da_pricing_enterprise_f5 || "Advanced Security",
+        translations.da_pricing_enterprise_f6 || "SLA Guarantee",
+        translations.da_pricing_enterprise_f7 || "Custom Integrations"
       ],
       popular: false
     }
   ];
-
   return (
     <section id="pricing-section" className="py-20 px-6" style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-6xl mx-auto">
         <motion.h2 variants={fadeUp} className="text-4xl font-bold text-center mb-16">
-          <span style={{ color: 'black' }}>Pricing</span> Plans
+          <span style={{ color: 'black' }}>{translations.da_pricing_title || "Pricing"}</span> {translations.da_pricing_plans || "Plans"}
         </motion.h2>
         <div className="grid md:grid-cols-3 gap-8 items-stretch">
           {plans.map((plan, index) => (
-    <motion.div
+            <motion.div
               key={index}
               variants={fadeUp}
               className={`relative p-8 rounded-2xl border-2 transition-all duration-300 flex flex-col h-full ${
@@ -332,7 +324,7 @@ const plans = [
                   color: 'white',
                   border: 'none'
                 }}>
-                  Most Popular
+                  {translations.da_pricing_most_popular || "Most Popular"}
                 </div>
               )}
               <div className="text-center mb-6">
@@ -350,50 +342,52 @@ const plans = [
                     <span className="text-gray-300">{feature}</span>
                   </li>
                 ))}
-            </ul>
+              </ul>
               <button className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 mt-auto ${
                 plan.popular
                   ? 'bg-[rgb(219,158,111)] text-white hover:bg-[#179b8e]'
                   : 'bg-gray-700 text-white hover:bg-gray-600'
               }`}>
-                {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
+                {plan.name === (translations.da_pricing_enterprise || "Enterprise")
+                  ? (translations.da_pricing_contact_sales || "Contact Sales")
+                  : (translations.da_pricing_get_started || "Get Started")}
               </button>
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
-  </section>
-);
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  );
 };
 
 // Main Component
-const CTASection = () => (
+const CTASection = ({ translations }) => (
   <section className={`py-16 px-4 w-full`} style={{background: 'white'}}>
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-      <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">Enhance Your Apps with NLP</h2>
+      <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">{translations.da_ctaTitle || "Unlock Insights with Data Analysis"}</h2>
       <p className={`text-lg mb-8 max-w-2xl text-black`}>
-        Unlock advanced language understanding, sentiment analysis, entity extraction, translation, and conversational AI for your business.<br />
+        {translations.da_ctaDesc || "Discover hidden trends, forecast future outcomes, and make smarter decisions with AI-powered data analysis and forecasting."}
        </p>
       <a href="/contact" className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
-        Start with NLP
+        {translations.da_ctaButton || "Start Analyzing Data"}
       </a>
     </div>
   </section>
 );
 
-const ContentGeneration = () => {
+const AIVoiceAndVedioTools = () => {
   const { theme } = useTheme();
-  
+  const { isRTL, translations } = useLanguage();
   return (
-    <main className={`${theme === "dark" ? "bg-[#0a0a0a] text-white" : "bg-white text-black"}`}>
-      <HeroSection theme={theme} />
-      <HowItWorksSection theme={theme} />
-      <FeaturesBenefitsSection theme={theme} />
-      <UseCasesSection theme={theme} />
-      <PricingSection theme={theme} />
-      <CTASection />
+    <main className={`${theme === "dark" ? "bg-[#0a0a0a] text-white" : "bg-white text-black"}`} dir={isRTL ? "rtl" : "ltr"}>
+      <HeroSection theme={theme} translations={translations} />
+      <HowItWorksSection theme={theme} translations={translations} />
+      <FeaturesBenefitsSection theme={theme} translations={translations} />
+      <UseCasesSection theme={theme} translations={translations} />
+      <PricingSection theme={theme} translations={translations} />
+      <CTASection translations={translations} />
     </main>
   );
 };
 
-export default ContentGeneration;
+export default AIVoiceAndVedioTools;

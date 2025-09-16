@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { FaGlobe } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import logo from "./assets/logo1.png";
 import { Menu, Transition } from "@headlessui/react";
@@ -8,16 +9,26 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useRole } from "./context/RoleContext";
 import { useScrollToTop } from "./hooks/useScrollToTop";
 
-const servicesDropdown = [
-  { name: "Content & Code Generation", path: "/services/content-generation" },
-  { name: "Automation & Workflow Tools", path: "/services/automation-tools" },
-  { name: "NLP & Language Intelligence", path: "/services/nlp-intelligence" },
-  { name: "Computer Vision Solutions", path: "/services/computer-vision" },
-  { name: "AI Chatbots & Assistants", path: "/services/ai-chatbots" },
-  { name: "Data Analysis & Forecasting", path: "/services/data-analysis" },
-];
+import { useLanguage } from "./context/LanguageContext";
+import ContentCodeGeneration from "./services/content-code-generation.jsx";
+import AutomationWorkflowTools from "./services/automation-workflow-tools.jsx";
+import AICodeAssistants from "./services/ai-code-assistants.jsx";
+import AIVoiceAndVedioTools from "./services/ai-voice-and-vedio-tools.jsx";
+import AIChatbotsAssistants from "./services/ai-chatbots-assistants.jsx";
+import DataAnalytics from "./services/data-analytics.jsx";
 
 export default function Header({ theme, toggleTheme }) {
+  const { language, setLanguage, isRTL, translations } = useLanguage();
+  const servicesDropdown = [
+  { name: translations.header_service_content || "Content Generation", path: "/services/content-code-generation" },
+  { name: translations.header_service_automation || "Automation Tools", path: "/services/automation-workflow-tools" },
+  { name: translations.header_service_code_assistants || "AI Code Assistants", path: "/services/ai-code-assistants" },
+  { name: translations.header_service_data_analytics || "Data & Analytics", path: "/services/data-analytics" },
+  { name: translations.header_service_chatbots || "AI Chatbots", path: "/services/ai-chatbots-assistants" },
+  { name: translations.header_service_voice_video || "AI Voice & Video Tools", path: "/services/ai-voice-and-vedio-tools" },
+  ];
+
+  const [showLangDropdown, setShowLangDropdown] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const { isAdmin, setIsAdmin } = useRole();
   const navigate = useNavigate();
@@ -54,7 +65,7 @@ export default function Header({ theme, toggleTheme }) {
         `${theme === 'dark'
           ? 'bg-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B] text-white'
           : 'bg-white text-black'} w-full flex items-center justify-between px-6 md:px-12 py-4 md:py-6 shadow-2xl sticky top-0 z-50 transition-all duration-300`
-      }>
+      } dir={isRTL ? "rtl" : "ltr"}>
       {/* Logo */}
       <div className="flex items-center gap-6">
         <button 
@@ -66,6 +77,7 @@ export default function Header({ theme, toggleTheme }) {
       </div>
       {/* Nav and Avatar aligned right */}
       <div className="flex items-center gap-4 ml-auto">
+        
   <nav className={`hidden md:flex items-center gap-8 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
           {/* Home Dropdown */}
           <div className="relative inline-block text-left">
@@ -75,7 +87,7 @@ export default function Header({ theme, toggleTheme }) {
                 className={`font-semibold text-lg focus:outline-none transition-colors duration-300
                   ${theme === 'dark' ? 'text-white hover:text-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B]' : 'text-black hover:text-gradient-to-r from-[#C19A6B] via-[#A67C52] to-[#8B5C2A]'}`}
               >
-                Home
+                {translations.footer_home1 || "Home"}
               </button>
               <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className={`focus:outline-none transition-colors duration-300
@@ -105,7 +117,7 @@ export default function Header({ theme, toggleTheme }) {
                             ? active ? 'bg-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B] text-black' : 'text-white'
                             : active ? 'bg-gradient-to-r from-[#C19A6B] via-[#A67C52] to-[#8B5C2A] text-black' : 'text-black'}`}
                       >
-                        Home 1
+                        {translations.footer_home1 || "Home 1"}
                       </button>
                     )}
                   </Menu.Item>
@@ -118,7 +130,7 @@ export default function Header({ theme, toggleTheme }) {
                             ? active ? 'bg-[#19e6f7] text-black' : 'text-white'
                             : active ? 'bg-[#19e6f7] text-black' : 'text-black'}`}
                       >
-                        Home 2
+                        {translations.header_home2 || "Home 2"}
                       </button>
                     )}
                   </Menu.Item>
@@ -134,7 +146,7 @@ export default function Header({ theme, toggleTheme }) {
             className={`text-lg font-semibold focus:outline-none transition-colors duration-300
               ${theme === 'dark' ? 'text-white hover:text-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B]' : 'text-black hover:text-gradient-to-r from-[#C19A6B] via-[#A67C52] to-[#8B5C2A]'}`}
           >
-            About Us
+            {translations.footer_about || "About Us"}
           </button>
           {/* Services Dropdown */}
           <div className="relative inline-block text-left">
@@ -144,7 +156,7 @@ export default function Header({ theme, toggleTheme }) {
                 className={`font-semibold text-lg focus:outline-none transition-colors duration-300
                   ${theme === 'dark' ? 'text-white hover:text-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B]' : 'text-black hover:text-gradient-to-r from-[#C19A6B] via-[#A67C52] to-[#8B5C2A]'}`}
               >
-                Services
+                {translations.footer_services || "Services"}
               </button>
               <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className={`focus:outline-none transition-colors duration-300
@@ -174,7 +186,7 @@ export default function Header({ theme, toggleTheme }) {
                             ? active ? 'bg-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B] text-black' : 'text-white'
                             : active ? 'bg-gradient-to-r from-[#C19A6B] via-[#A67C52] to-[#8B5C2A] text-black' : 'text-black'}`}
                       >
-                        View All Services
+                        {translations.header_view_all_services || "View All Services"}
                       </button>
                     )}
                   </Menu.Item>
@@ -206,7 +218,7 @@ export default function Header({ theme, toggleTheme }) {
             className={`text-lg font-semibold focus:outline-none transition-colors duration-300
               ${theme === 'dark' ? 'text-white hover:text-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B]' : 'text-black hover:text-gradient-to-r from-[#C19A6B] via-[#A67C52] to-[#8B5C2A]'}`}
           >
-            Blog
+            {translations.footer_blog || "Blog"}
           </button>
           {/* Contact Us */}
           <button
@@ -214,7 +226,7 @@ export default function Header({ theme, toggleTheme }) {
             className={`text-lg font-semibold focus:outline-none transition-colors duration-300
               ${theme === 'dark' ? 'text-white hover:text-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B]' : 'text-black hover:text-gradient-to-r from-[#C19A6B] via-[#A67C52] to-[#8B5C2A]'}`}
           >
-            Contact Us
+            {translations.footer_contact || "Contact Us"}
           </button>
         </nav>
         {/* Theme Toggle Button */}
@@ -259,7 +271,7 @@ export default function Header({ theme, toggleTheme }) {
                           active ? "bg-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B] text-black" : "text-[#A67C52]"
                         }`}
                       >
-                        Logout
+                        {translations.header_logout || "Logout"}
                       </button>
                     )}
                   </Menu.Item>
@@ -268,6 +280,33 @@ export default function Header({ theme, toggleTheme }) {
             </Transition>
           </Menu>
         )}
+        {/* Globe Icon with Dropdown */}
+        <div className="relative flex items-center">
+          <button
+            onClick={() => setShowLangDropdown((prev) => !prev)}
+            className="flex items-center p-2 rounded-full border border-[#A67C52] bg-white text-black focus:outline-none focus:ring-2 focus:ring-[#A67C52]"
+            aria-label="Select language"
+            style={{ minWidth: 40 }}
+          >
+            <FaGlobe className="h-5 w-5 text-[#A67C52]" />
+          </button>
+          {showLangDropdown && (
+              <div className={`absolute top-full -right-0  mt-2 w-40 rounded-md shadow-lg border py-2 ${theme === 'dark' ? 'bg-[#1E2A38] border-[#141B25]' : 'bg-white border-gray-200'}`}>
+              <button
+                className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${language === 'english' ? 'font-bold' : ''}`}
+                onClick={() => { setLanguage('english'); setShowLangDropdown(false); }}
+              >English</button>
+              <button
+                className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${language === 'arabic' ? 'font-bold' : ''}`}
+                onClick={() => { setLanguage('arabic'); setShowLangDropdown(false); }}
+              >العربية</button>
+              <button
+                className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${language === 'hebrew' ? 'font-bold' : ''}`}
+                onClick={() => { setLanguage('hebrew'); setShowLangDropdown(false); }}
+              >עברית</button>
+            </div>
+          )}
+        </div>
       </div>
       {/* Mobile Menu Button */}
       <button
@@ -284,7 +323,7 @@ export default function Header({ theme, toggleTheme }) {
       {menuOpen && (
   <div className="absolute top-full left-0 w-full bg-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B] text-white p-6 flex flex-col space-y-4 md:hidden z-50 shadow-2xl animate-fade-in">
           <div>
-            <p className="text-white font-semibold mb-2 text-lg">Home</p>
+            <p className="text-white font-semibold mb-2 text-lg">{translations.footer_home1 || "Home"}</p>
             <ul className="space-y-2">
               <li>
                 <Link 
@@ -292,7 +331,7 @@ export default function Header({ theme, toggleTheme }) {
                   className="block text-base hover:text-[#A67C52] group focus:outline-none"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">Home 1</span>
+                  <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">{translations.footer_home1 || "Home 1"}</span>
                 </Link>
               </li>
               <li>
@@ -301,7 +340,7 @@ export default function Header({ theme, toggleTheme }) {
                   className="block text-base hover:text-[#A67C52] group focus:outline-none"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">Home 2</span>
+                  <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">{translations.header_home2 || "Home 2"}</span>
                 </Link>
               </li>
             </ul>
@@ -311,10 +350,10 @@ export default function Header({ theme, toggleTheme }) {
             className="text-lg hover:text-white group focus:outline-none"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="group-hover:scale-105 group-hover:text-white transition-transform duration-300">About Us</span>
+            <span className="group-hover:scale-105 group-hover:text-white transition-transform duration-300">{translations.footer_about || "About Us"}</span>
           </Link>
           <div>
-            <p className="text-white font-semibold mb-2 text-lg">Services</p>
+            <p className="text-white font-semibold mb-2 text-lg">{translations.footer_services || "Services"}</p>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -322,7 +361,7 @@ export default function Header({ theme, toggleTheme }) {
                   className="block text-base hover:text-[#A67C52] group focus:outline-none"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">View All Services</span>
+                  <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">{translations.header_view_all_services || "View All Services"}</span>
                 </Link>
               </li>
               {servicesDropdown.map((item, i) => (
@@ -343,14 +382,14 @@ export default function Header({ theme, toggleTheme }) {
             className="text-lg hover:text-[#A67C52] group focus:outline-none"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">Blog</span>
+            <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">{translations.footer_blog || "Blog"}</span>
           </Link>
           <Link 
             to="/contact-us" 
             className="text-lg hover:text-[#A67C52] group focus:outline-none"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">Contact Us</span>
+            <span className="group-hover:scale-105 group-hover:text-[#A67C52] transition-transform duration-300">{translations.footer_contact || "Contact Us"}</span>
           </Link>
         </div>
       )}

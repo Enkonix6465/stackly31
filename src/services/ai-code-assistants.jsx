@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import heroVideo from "../assets/content.mp4";
 import { useTheme } from "../context/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
 import howItWorksImg from '../assets/Content & Code Generation1.webp';
 import agentImg from '../assets/Content & Code Generation2.png';
 import { FaRegHandshake, FaPencilRuler, FaCogs, FaLaptopCode, FaRocket } from 'react-icons/fa';
@@ -43,7 +44,7 @@ const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, tra
 const staggerContainer = { hidden: {}, visible: { transition: { staggerChildren: 0.15 } } };
 
 // 1. HERO SECTION
-const HeroSection = ({ theme }) => (
+const HeroSection = ({ theme, translations }) => (
   <motion.section
     initial="hidden"
     whileInView="visible"
@@ -63,10 +64,10 @@ const HeroSection = ({ theme }) => (
     <div className="bg-black bg-opacity-60 absolute inset-0"></div>
     <div className="relative z-10 pt-20">
         <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-bold mb-6 text-white">
-          Data & Analytics
+          {translations.nlp_heroTitle || "AI Code Assistants"}
         </motion.h1>
       <motion.p variants={fadeUp} className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-8">
-        Unlock insights and drive smarter decisions with AI-powered data analytics tools. Instantly analyze, visualize, and forecast data for any business need.
+        {translations.nlp_heroDesc || "Boost your development workflow with AI-powered code assistants. Instantly generate, review, and optimize code for any language or framework."}
       </motion.p>
        
       <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
@@ -87,7 +88,7 @@ const HeroSection = ({ theme }) => (
               border: 'none',
             }}
           >
-            Explore Features
+            {translations.nlp_exploreFeatures || "Explore Features"}
           </button>
       </motion.div>
     </div>
@@ -95,12 +96,12 @@ const HeroSection = ({ theme }) => (
 );
 
 // 2. HOW IT WORKS SECTION
-const HowItWorksSection = ({ theme }) => (
+const HowItWorksSection = ({ theme, translations }) => (
   <section className={`w-full py-24 px-4 ${theme === 'dark' ? 'bg-[#111211]' : 'bg-gray-100'}`}>
     <div className="max-w-5xl mx-auto">
       <div className="text-center mb-16">
-        <div className="text-[#312525] text-sm font-semibold mb-2 tracking-wider">PROCESS</div>
-        <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>How It Works</h2>
+  <div className="text-[#312525] text-sm font-semibold mb-2 tracking-wider">{translations.nlp_process || "PROCESS"}</div>
+  <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{translations.nlp_howItWorks || "How It Works"}</h2>
       </div>
       <div className="relative flex flex-col items-center">
         {/* Horizontal line */}
@@ -111,41 +112,36 @@ const HowItWorksSection = ({ theme }) => (
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
               <FaRegHandshake className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Connect Your Data</div>
-            <div className="text-xs text-center text-gray-600">Import data from spreadsheets, databases, or cloud sources.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.nlp_step1 || "Describe Coding Task"}</div>
+           </div>
           {/* Step 2 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
               <FaPencilRuler className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Analyze & Explore</div>
-            <div className="text-xs text-center text-gray-600">Use AI tools to analyze, filter, and explore your data.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.nlp_step2 || "Get Code Suggestions"}</div>
+           </div>
           {/* Step 3 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
               <FaCogs className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Visualize Insights</div>
-            <div className="text-xs text-center text-gray-600">Create charts, dashboards, and reports to share findings.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.nlp_step3 || "Edit & Refine"}</div>
+           </div>
           {/* Step 4 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
               <FaLaptopCode className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Forecast & Predict</div>
-            <div className="text-xs text-center text-gray-600">Use machine learning to forecast trends and predict outcomes.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.nlp_step4 || "Learn & Automate"}</div>
+           </div>
           {/* Step 5 */}
           <div className="flex flex-col items-center w-1/5">
             <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center mb-4">
               <FaRocket className="text-white text-3xl" />
             </div>
-            <div className="font-bold text-lg mb-1 text-center">Share & Collaborate</div>
-            <div className="text-xs text-center text-gray-600">Export results, share dashboards, and collaborate with your team.</div>
-          </div>
+            <div className="font-bold text-lg mb-1 text-center">{translations.nlp_step5 || "Deploy & Share"}</div>
+           </div>
         </div>
         {/* Dots on the line */}
         <div className="absolute top-16 left-0 w-full flex justify-between px-8" style={{zIndex:1}}>
@@ -159,29 +155,28 @@ const HowItWorksSection = ({ theme }) => (
 );
 
 // 3. KEY FEATURES & BENEFITS SECTION (modern card layout)
-const FeaturesBenefitsSection = ({ theme }) => {
+const FeaturesBenefitsSection = ({ theme, translations }) => {
   const features = [
-    { title: 'Data Integration' },
-    { title: 'Advanced Analytics' },
-    { title: 'Visualization' },
-    { title: 'Forecasting' },
-    { title: 'Collaboration' },
-    { title: 'Reporting' }
+    { title: translations.nlp_feature1 || 'Sentiment Analysis' },
+    { title: translations.nlp_feature2 || 'Named Entity Recognition' },
+    { title: translations.nlp_feature3 || 'Text Summarization' },
+    { title: translations.nlp_feature4 || 'Language Translation' },
+    { title: translations.nlp_feature5 || 'Topic Modeling' },
+    { title: translations.nlp_feature6 || 'Conversational AI' }
   ];
   return (
-  <section id="features-section" className="w-full h-full pt-0 pb-0 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
+    <section id="features-section" className="w-full h-full pt-0 pb-0 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-0 items-center relative z-10 -space-x-8">
         <div className="flex-1 flex flex-col justify-center items-start mb-10 md:mb-0 md:pr-8">
-          <h2 className={`text-4xl md:text-5xl font-extrabold mb-2 mt-0 ${theme === 'dark' ? 'text-black' : 'text-white'}`}>Features & Benefits</h2>
-           <p className={`text-xl mb-6 max-w-lg ${theme === 'dark' ? 'text-white' : 'text-white'}`}>Our data & analytics platform helps you connect, analyze, and visualize data from any source.<br /><br />
-             Use advanced analytics, forecasting, and reporting tools to uncover trends and make data-driven decisions.<br /><br />
-             Collaborate with your team and share insights instantly.
-          </p>
+          <h2 className={`text-4xl md:text-5xl font-extrabold mb-2 mt-0 ${theme === 'dark' ? 'text-black' : 'text-white'}`}>{translations.nlp_featuresTitle || "Features & Benefits"}</h2>
+          <p className={`text-xl mb-6 max-w-lg ${theme === 'dark' ? 'text-white' : 'text-white'}`}>{translations.nlp_featuresDesc || "Unlock the power of Natural Language Processing. Enhance your applications with intelligent language features for business, research, and communication."}</p>
           <ul className={`list-disc pl-5 text-lg mb-8 space-y-2 ${theme === 'dark' ? 'text-white' : 'text-white'}`}>
-            <li>Integrate data from multiple sources</li>
-            <li>Advanced analytics and machine learning</li>
-            <li>Interactive dashboards and visualizations</li>
-            <li>Automated reporting and sharing</li>
+            <li>{translations.nlp_benefit1 || "Text classification and sentiment analysis"}</li>
+            <li>{translations.nlp_benefit2 || "Named entity recognition and extraction"}</li>
+            <li>{translations.nlp_benefit3 || "Text summarization and keyword extraction"}</li>
+            <li>{translations.nlp_benefit4 || "Language translation and multilingual support"}</li>
+            <li>{translations.nlp_benefit5 || "Conversational AI and chatbots"}</li>
+            <li>{translations.nlp_benefit6 || "Intent detection and topic modeling"}</li>
           </ul>
         </div>
         <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 gap-8 w-full pt-20 pb-20 justify-items-center">
@@ -204,59 +199,29 @@ const FeaturesBenefitsSection = ({ theme }) => {
 };
 
 // 4. BENEFITS SECTION (modern two-column layout)
-const BenefitsSection = ({ theme }) => {
-  const benefits = [
-    "Make data-driven decisions with confidence",
-    "Automate reporting and save time",
-    "Uncover hidden trends and opportunities",
-    "Collaborate and share insights instantly",
-    "Predict outcomes and optimize operations"
-  ];
-  return (
-    <section className={`w-full py-20 px-4 ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"}`}>
-      <div className="text-center mb-12">
-        <h2 className={`text-3xl md:text-4xl font-extrabold mb-8 ${theme === "dark" ? "text-white" : "text-black"}`}>Benefits of Data & Analytics</h2>
-      </div>
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 items-stretch">
-        <div className="flex-1 flex flex-col justify-center h-full">
-          <div className="text-justify h-full flex flex-col justify-center">
-            <ul className="space-y-4">
-              {benefits.map((benefit, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <span className="text-[#19e6f7] text-2xl font-bold mr-3">•</span>
-                  <span className={`text-base leading-relaxed text-justify ${theme === "dark" ? "text-white" : "text-black"}`}>{benefit}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 // 6. REAL LIFE USE CASES & APPLICATIONS SECTION
-const UseCasesSection = ({ theme }) => {
+const UseCasesSection = ({ theme, translations }) => {
   const useCases = [
     {
       icon: blogCatTools,
-      title: 'Business Intelligence',
-      desc: 'Analyze sales, operations, and customer data to drive business growth.'
+      title: translations.nlp_usecase1_title || 'Code Generation',
+      desc: translations.nlp_usecase1_desc || 'Quickly generate code snippets, functions, and modules for any project.'
     },
     {
       icon: blogCatTrends,
-      title: 'Financial Forecasting',
-      desc: 'Predict revenue, expenses, and market trends with AI-powered models.'
+      title: translations.nlp_usecase2_title || 'Code Review',
+      desc: translations.nlp_usecase2_desc || 'Automate code reviews and get instant feedback on quality and security.'
     },
     {
       icon: blogCatCase,
-      title: 'Customer Analytics',
-      desc: 'Segment customers, track behavior, and personalize marketing.'
+      title: translations.nlp_usecase3_title || 'Bug Fixing',
+      desc: translations.nlp_usecase3_desc || 'Detect and fix bugs automatically with AI-powered suggestions.'
     },
     {
       icon: blogCatThought,
-      title: 'Operational Efficiency',
-      desc: 'Optimize supply chain, inventory, and resource allocation.'
+      title: translations.nlp_usecase4_title || 'Documentation',
+      desc: translations.nlp_usecase4_desc || 'Generate and update code documentation instantly.'
     }
   ];
 
@@ -265,11 +230,10 @@ const UseCasesSection = ({ theme }) => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-left">
           <h2 className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
-            Real-Life Use Cases & Applications
+            {translations.nlp_usecasesTitle || "Real-Life Use Cases & Applications"}
           </h2>
-           <p className="text-lg text-white max-w-2xl mb-8 leading-relaxed">
-            Discover how data & analytics is transforming decision-making for businesses, healthcare, and more.<br />
-            Our platform adapts to your needs, delivering insights and speed for any use case.
+          <p className="text-lg text-white max-w-2xl mb-8 leading-relaxed">
+            {translations.nlp_usecasesDesc || "Discover how generative AI is transforming content creation for businesses, educators, and creators.\nOur platform adapts to your needs, delivering quality and speed for any use case."}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -289,48 +253,50 @@ const UseCasesSection = ({ theme }) => {
 };
 
 // 7. PRICING SECTION
-const PricingSection = ({ theme }) => {
+const PricingSection = ({ theme, translations }) => {
 const plans = [
     {
-      name: "Starter",
-      price: "$39",
-      period: "/month",
-      desc: "For individuals & small teams",
+      name: translations.nlp_pricing_starter || "Starter",
+      price: "$49",
+      period: translations.nlp_pricing_month || "/month",
+      desc: translations.nlp_pricing_starter_desc || "For individuals & freelancers",
       features: [
-        "Basic Data Integration",
-        "Up to 10 dashboards",
-        "Standard Analytics",
-        "Email Support",
-        "Export to CSV/PDF"
+        translations.nlp_pricing_starter_f1 || "Basic Content Generation",
+        translations.nlp_pricing_starter_f2 || "Up to 500 outputs/month",
+        translations.nlp_pricing_starter_f3 || "Email Support",
+        translations.nlp_pricing_starter_f4 || "Standard Templates",
+        translations.nlp_pricing_starter_f5 || "Basic Collaboration"
       ],
       popular: false
     },
     {
-      name: "Professional",
-      price: "$129",
-      period: "/month",
-      desc: "For growing businesses",
+      name: translations.nlp_pricing_professional || "Professional",
+      price: "$149",
+      period: translations.nlp_pricing_month || "/month",
+      desc: translations.nlp_pricing_professional_desc || "For teams & businesses",
       features: [
-        "Advanced Analytics & ML",
-        "Unlimited dashboards",
-        "Collaboration Tools",
-        "Priority Support",
-        "Custom Integrations"
+        translations.nlp_pricing_professional_f1 || "Advanced Content Generation",
+        translations.nlp_pricing_professional_f2 || "Unlimited outputs",
+        translations.nlp_pricing_professional_f3 || "Priority Support",
+        translations.nlp_pricing_professional_f4 || "Custom Templates",
+        translations.nlp_pricing_professional_f5 || "Real-Time Collaboration",
+        translations.nlp_pricing_professional_f6 || "API Access"
       ],
       popular: true
     },
     {
-      name: "Enterprise",
-      price: "Custom",
+      name: translations.nlp_pricing_enterprise || "Enterprise",
+      price: translations.nlp_pricing_enterprise_price || "Custom",
       period: "",
-      desc: "For large organizations",
+      desc: translations.nlp_pricing_enterprise_desc || "For large organizations",
       features: [
-        "Dedicated Account Manager",
-        "On-premise Option",
-        "Advanced Security",
-        "SLA Guarantee",
-        "24/7 Phone Support",
-        "Unlimited Data Sources"
+        translations.nlp_pricing_enterprise_f1 || "Custom AI Models",
+        translations.nlp_pricing_enterprise_f2 || "Dedicated Account Manager",
+        translations.nlp_pricing_enterprise_f3 || "24/7 Phone Support",
+        translations.nlp_pricing_enterprise_f4 || "On-premise Option",
+        translations.nlp_pricing_enterprise_f5 || "Advanced Security",
+        translations.nlp_pricing_enterprise_f6 || "SLA Guarantee",
+        translations.nlp_pricing_enterprise_f7 || "Custom Integrations"
       ],
       popular: false
     }
@@ -340,7 +306,7 @@ const plans = [
     <section id="pricing-section" className="py-20 px-6" style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-6xl mx-auto">
         <motion.h2 variants={fadeUp} className="text-4xl font-bold text-center mb-16">
-          <span style={{ color: 'black' }}>Pricing</span> Plans
+          <span style={{ color: 'black' }}>{translations.nlp_pricing_title || "Pricing"}</span> {translations.nlp_pricing_plans || "Plans"}
         </motion.h2>
         <div className="grid md:grid-cols-3 gap-8 items-stretch">
           {plans.map((plan, index) => (
@@ -353,15 +319,15 @@ const plans = [
                   : 'border-gray-700 bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a]'
               } hover:scale-110 hover:shadow-2xl hover:shadow-[#19e6f7]/40`}
             >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-full font-semibold text-sm" style={{
-                  background: 'rgb(219, 158, 111)',
-                  color: 'white',
-                  border: 'none'
-                }}>
-                  Most Popular
-                </div>
-              )}
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-full font-semibold text-sm" style={{
+                    background: 'rgb(219, 158, 111)',
+                    color: 'white',
+                    border: 'none'
+                  }}>
+                    {translations.nlp_pricing_most_popular || "Most Popular"}
+                  </div>
+                )}
               <div className="text-center mb-6">
                 <h3 className={`text-2xl font-bold mb-2 text-white`}>{plan.name}</h3>
                 <p className="mb-4 text-white/80">{plan.desc}</p>
@@ -383,7 +349,9 @@ const plans = [
                   ? 'bg-[rgb(219,158,111)] text-white hover:bg-[#179b8e]'
                   : 'bg-gray-700 text-white hover:bg-gray-600'
               }`}>
-                {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
+                {plan.name === (translations.nlp_pricing_enterprise || "Enterprise")
+                  ? (translations.nlp_pricing_contact_sales || "Contact Sales")
+                  : (translations.nlp_pricing_get_started || "Get Started")}
               </button>
           </motion.div>
         ))}
@@ -394,34 +362,33 @@ const plans = [
 };
 
 // Main Component
-const CTASection = () => (
+const CTASection = ({ translations }) => (
   <section className={`py-16 px-4 w-full`} style={{background: 'white'}}>
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-      <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">Unlock the Power of Computer Vision</h2>
+      <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">{translations.nlp_ctaTitle || "Enhance Your Apps with NLP"}</h2>
       <p className={`text-lg mb-8 max-w-2xl text-black`}>
-        Analyze images and videos, detect objects, automate inspections, and gain actionable insights with advanced computer vision solutions.<br />
+        {translations.nlp_ctaDesc || "Unlock advanced language understanding, sentiment analysis, entity extraction, translation, and conversational AI for your business."}
        </p>
       <a href="/contact" className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
-        Start with Computer Vision
+        {translations.nlp_ctaButton || "Start with NLP"}
       </a>
     </div>
   </section>
 );
 
-const ContentGeneration = () => {
+const AICodeAssistants = () => {
   const { theme } = useTheme();
-  
+  const { isRTL, translations } = useLanguage();
   return (
-    <main className={`${theme === "dark" ? "bg-[#0a0a0a] text-white" : "bg-white text-black"}`}>
-      <HeroSection theme={theme} />
-      <HowItWorksSection theme={theme} />
-      <FeaturesBenefitsSection theme={theme} />
-      <BenefitsSection theme={theme} />
-      <UseCasesSection theme={theme} />
-      <PricingSection theme={theme} />
-      <CTASection />
+    <main className={`${theme === "dark" ? "bg-[#0a0a0a] text-white" : "bg-white text-black"}`} dir={isRTL ? "rtl" : "ltr"}>
+      <HeroSection theme={theme} translations={translations} />
+      <HowItWorksSection theme={theme} translations={translations} />
+      <FeaturesBenefitsSection theme={theme} translations={translations} />
+      <UseCasesSection theme={theme} translations={translations} />
+      <PricingSection theme={theme} translations={translations} />
+      <CTASection translations={translations} />
     </main>
   );
 };
 
-export default ContentGeneration;
+export default AICodeAssistants;

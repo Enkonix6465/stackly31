@@ -10,12 +10,12 @@ import ForgotPassword from './pages/ForgotPassword';
 import SecondHome from './pages/home2';
 import AboutUs from "./pages/AboutUs";
 import Services from "./pages/Services";
-import ContentCodeGeneration from "./services/Content & Code Generation";
-import AutomationWorkflowTools from "./services/Automation & Workflow Tools";
-import NLPLanguageIntelligence from "./services/NLP & Language Intelligence";
-import ComputerVisionSolutions from "./services/Computer Vision Solutions";
-import AutomationEfficiency from "./services/AI Chatbots & Assistants";
-import DataAnalysisForecasting from "./services/Data Analysis & Forecasting";
+import ContentCodeGeneration from "./services/content-code-generation.jsx";
+import AutomationWorkflowTools from "./services/automation-workflow-tools.jsx";
+import AICodeAssistants from "./services/ai-code-assistants.jsx";
+import AIVoiceAndVedioTools from "./services/ai-voice-and-vedio-tools.jsx";
+import AIChatbotsAssistants from "./services/ai-chatbots-assistants.jsx";
+import DataAnalytics from "./services/data-analytics.jsx";
 import BlogPage from "./pages/Blog";
 import Welcome from "./pages/Welcome";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -25,6 +25,7 @@ import { RoleProvider } from "./context/RoleContext";
 import BlogDetails from "./pages/BlogDetails";
 import EditorPickDetails from "./pages/EditorPickDetails";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { LanguageProvider } from "./context/LanguageContext";
 
 function AppContent() {
   const location = useLocation();
@@ -48,12 +49,12 @@ function AppContent() {
 
           {/* Public Routes */}
           <Route path="/services" element={<Services />} />
-          <Route path="/services/content-generation" element={<ContentCodeGeneration />} />
-          <Route path="/services/automation-tools" element={<AutomationWorkflowTools />} />
-          <Route path="/services/nlp-intelligence" element={<NLPLanguageIntelligence />} />
-          <Route path="/services/computer-vision" element={<ComputerVisionSolutions />} />
-          <Route path="/services/ai-chatbots" element={<AutomationEfficiency />} />
-          <Route path="/services/data-analysis" element={<DataAnalysisForecasting />} />
+          <Route path="/services/content-code-generation" element={<ContentCodeGeneration />} />
+          <Route path="/services/automation-workflow-tools" element={<AutomationWorkflowTools />} />
+          <Route path="/services/ai-code-assistants" element={<AICodeAssistants />} />
+          <Route path="/services/ai-voice-and-vedio-tools" element={<AIVoiceAndVedioTools />} />
+          <Route path="/services/ai-chatbots-assistants" element={<AIChatbotsAssistants />} />
+          <Route path="/services/data-analytics" element={<DataAnalytics />} />
 
           {/* Protected Routes - Allow both user and admin */}
           <Route element={<ProtectedRoute allowedRoles={["user", "admin"]} />}>
@@ -83,7 +84,9 @@ function App() {
   return (
     <RoleProvider>
       <ThemeProvider>
-        <AppContent />
+        <LanguageProvider>
+          <AppContent />
+        </LanguageProvider>
       </ThemeProvider>
     </RoleProvider>
   );

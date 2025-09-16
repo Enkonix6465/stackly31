@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLanguage } from "./context/LanguageContext";
 import { useNavigate } from 'react-router-dom';
 import homeHero from './assets/homehero2.png';
 import homeHeroVideo from './assets/homepagehero.mp4';
@@ -18,6 +19,7 @@ import img9 from './assets/9.webp';
 import img10 from './assets/10.jpg';
 
 export default function HomePage() {
+  const { language, isRTL, translations } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoPlayRef = useRef(null);
@@ -29,6 +31,88 @@ export default function HomePage() {
     img1, img2, img3, img4, img5,
     img6, img7, img8, img9, img10,
   ];
+
+  const servicesTranslations = {
+    english: [
+      {
+        title: 'Content Generation',
+        desc: 'Generate high-quality written content for blogs, marketing, and more with advanced AI tools.'
+      },
+      {
+        title: 'Image & Design Tools',
+        desc: 'Create stunning images, graphics, and designs using AI-powered creativity and automation.'
+      },
+      {
+        title: 'AI Chatbots & Virtual Assistants',
+        desc: 'Automate customer support and engagement with intelligent chatbots and virtual assistants.'
+      },
+      {
+        title: 'AI Code Assistants',
+        desc: 'Boost your coding productivity with AI-powered code completion, review, and generation.'
+      },
+      {
+        title: 'Data & Analytics',
+        desc: 'Analyze data, generate insights, and forecast trends for smarter business decisions.'
+      },
+      {
+        title: 'AI Voice & Video Tools',
+        desc: 'Transform audio and video content with AI-driven editing, enhancement, and automation.'
+      }
+    ],
+    arabic: [
+      {
+        title: 'إنشاء المحتوى',
+        desc: 'أنشئ محتوى مكتوب عالي الجودة للمدونات والتسويق والمزيد باستخدام أدوات الذكاء الاصطناعي المتقدمة.'
+      },
+      {
+        title: 'أدوات الصور والتصميم',
+        desc: 'أنشئ صورًا وتصاميم رائعة باستخدام الإبداع والأتمتة المدعومة بالذكاء الاصطناعي.'
+      },
+      {
+        title: 'الدردشة الذكية والمساعدون الافتراضيون',
+        desc: 'قم بأتمتة دعم العملاء والتفاعل معهم باستخدام الدردشة الذكية والمساعدين الافتراضيين.'
+      },
+      {
+        title: 'مساعدو البرمجة بالذكاء الاصطناعي',
+        desc: 'عزز إنتاجيتك البرمجية باستخدام الإكمال والمراجعة وإنشاء الكود المدعوم بالذكاء الاصطناعي.'
+      },
+      {
+        title: 'البيانات والتحليلات',
+        desc: 'حلل البيانات، واستخرج الرؤى، وتوقع الاتجاهات لاتخاذ قرارات أعمال أكثر ذكاءً.'
+      },
+      {
+        title: 'أدوات الصوت والفيديو بالذكاء الاصطناعي',
+        desc: 'حوّل المحتوى الصوتي والمرئي باستخدام التحرير والتحسين والأتمتة المدعومة بالذكاء الاصطناعي.'
+      }
+    ],
+    hebrew: [
+      {
+        title: 'יצירת תוכן',
+        desc: 'צור תוכן כתוב איכותי לבלוגים, שיווק ועוד עם כלי AI מתקדמים.'
+      },
+      {
+        title: 'כלי תמונה ועיצוב',
+        desc: 'צור תמונות, גרפיקה ועיצובים מדהימים באמצעות יצירתיות ואוטומציה מבוססת AI.'
+      },
+      {
+        title: 'צ׳אטבוטים ועוזרים וירטואליים',
+        desc: 'אוטומציה של תמיכת לקוחות ומעורבות עם צ׳אטבוטים ועוזרים וירטואליים חכמים.'
+      },
+      {
+        title: 'עוזרי קוד מבוססי AI',
+        desc: 'שפר את הפרודוקטיביות שלך עם השלמת קוד, סקירה ויצירה מבוססי AI.'
+      },
+      {
+        title: 'נתונים וניתוחים',
+        desc: 'נתח נתונים, הפק תובנות וחזה מגמות לקבלת החלטות עסקיות חכמות יותר.'
+      },
+      {
+        title: 'כלי קול ווידאו מבוססי AI',
+        desc: 'הפוך תוכן אודיו ווידאו עם עריכה, שיפור ואוטומציה מבוססי AI.'
+      }
+    ]
+  };
+  const services = servicesTranslations[language];
 
   // Scroll to top when component mounts
   useScrollToTop();
@@ -44,56 +128,159 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "Aarav",
-      image: "https://randomuser.me/api/portraits/men/31.jpg",
-      stars: "★★★★★",
-      text: "Joining this platform was the best decision for my business. The expert AI tools and personalized support helped me automate workflows!",
-      handle: "@aarav.brown"
-    },
-    {
-      id: 2,
-      name: "Hindley Ernshaw",
-      image: "https://randomuser.me/api/portraits/women/65.jpg",
-      stars: "★★★★★",
-      text: "The AI-powered chatbots and workflow tools are a game changer. Highly recommend for any business looking to scale with AI.",
-      handle: "@hindley.es"
-    },
-    {
-      id: 3,
-      name: "Victoria Weirro",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      stars: "★★★★★",
-      text: "The AI analytics dashboard gave me insights I never had before. The support team is unmatched!",
-      handle: "Femmetrain Oslo Co."
-    },
-    {
-      id: 4,
-      name: "Lina Gomez",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
-      stars: "★★★★★",
-      text: "The transformation programs are amazing! I gained confidence and strength with this amazing platform.",
-      handle: "Member"
-    },
-    {
-      id: 5,
-      name: "Basil Nishved",
-      image: "https://randomuser.me/api/portraits/men/33.jpg",
-      stars: "★★★★★",
-      text: "The AI tools and expert advice keep me on track. I have never felt more supported in my business journey!",
-      handle: "Co-Founder Grandcoz"
-    },
-    {
-      id: 6,
-      name: "Samuel Lee",
-      image: "https://randomuser.me/api/portraits/men/45.jpg",
-      stars: "★★★★★",
-      text: "Exceptional platform! The range of AI tools available has helped our team innovate faster and deliver better results.",
-      handle: "@samuel.lee"
-    }
-  ];
+  const testimonialsData = {
+    english: [
+      {
+        id: 1,
+        name: "Aarav",
+        image: "https://randomuser.me/api/portraits/men/31.jpg",
+        stars: "★★★★★",
+        text: "Joining this platform was the best decision for my business. The expert AI tools and personalized support helped me automate workflows!",
+        handle: "@aarav.brown"
+      },
+      {
+        id: 2,
+        name: "Hindley Ernshaw",
+        image: "https://randomuser.me/api/portraits/women/65.jpg",
+        stars: "★★★★★",
+        text: "The AI-powered chatbots and workflow tools are a game changer. Highly recommend for any business looking to scale with AI.",
+        handle: "@hindley.es"
+      },
+      {
+        id: 3,
+        name: "Victoria Weirro",
+        image: "https://randomuser.me/api/portraits/women/44.jpg",
+        stars: "★★★★★",
+        text: "The AI analytics dashboard gave me insights I never had before. The support team is unmatched!",
+        handle: "Femmetrain Oslo Co."
+      },
+      {
+        id: 4,
+        name: "Lina Gomez",
+        image: "https://randomuser.me/api/portraits/women/68.jpg",
+        stars: "★★★★★",
+        text: "The transformation programs are amazing! I gained confidence and strength with this amazing platform.",
+        handle: "Member"
+      },
+      {
+        id: 5,
+        name: "Basil Nishved",
+        image: "https://randomuser.me/api/portraits/men/33.jpg",
+        stars: "★★★★★",
+        text: "The AI tools and expert advice keep me on track. I have never felt more supported in my business journey!",
+        handle: "Co-Founder Grandcoz"
+      },
+      {
+        id: 6,
+        name: "Samuel Lee",
+        image: "https://randomuser.me/api/portraits/men/45.jpg",
+        stars: "★★★★★",
+        text: "Exceptional platform! The range of AI tools available has helped our team innovate faster and deliver better results.",
+        handle: "@samuel.lee"
+      }
+    ],
+    arabic: [
+      {
+        id: 1,
+        name: "أرناف",
+        image: "https://randomuser.me/api/portraits/men/31.jpg",
+        stars: "★★★★★",
+        text: "الانضمام إلى هذه المنصة كان أفضل قرار لعملي. أدوات الذكاء الاصطناعي والدعم الشخصي ساعدوني في أتمتة سير العمل!",
+        handle: "@aarav.brown"
+      },
+      {
+        id: 2,
+        name: "هندلي إيرنشو",
+        image: "https://randomuser.me/api/portraits/women/65.jpg",
+        stars: "★★★★★",
+        text: "الدردشة الذكية وأدوات سير العمل غيرت قواعد اللعبة. أنصح بها لأي عمل يريد النمو بالذكاء الاصطناعي.",
+        handle: "@hindley.es"
+      },
+      {
+        id: 3,
+        name: "فيكتوريا ويرو",
+        image: "https://randomuser.me/api/portraits/women/44.jpg",
+        stars: "★★★★★",
+        text: "لوحة تحليلات الذكاء الاصطناعي أعطتني رؤى لم أحصل عليها من قبل. فريق الدعم رائع!",
+        handle: "Femmetrain Oslo Co."
+      },
+      {
+        id: 4,
+        name: "لينا غوميز",
+        image: "https://randomuser.me/api/portraits/women/68.jpg",
+        stars: "★★★★★",
+        text: "برامج التحول رائعة! اكتسبت ثقة وقوة مع هذه المنصة المذهلة.",
+        handle: "عضو"
+      },
+      {
+        id: 5,
+        name: "باسل نيشفيد",
+        image: "https://randomuser.me/api/portraits/men/33.jpg",
+        stars: "★★★★★",
+        text: "أدوات الذكاء الاصطناعي والنصائح الخبيرة تبقيني على المسار الصحيح. لم أشعر بالدعم أكثر في رحلتي العملية!",
+        handle: "المؤسس المشارك Grandcoz"
+      },
+      {
+        id: 6,
+        name: "صموئيل لي",
+        image: "https://randomuser.me/api/portraits/men/45.jpg",
+        stars: "★★★★★",
+        text: "منصة استثنائية! مجموعة أدوات الذكاء الاصطناعي ساعدت فريقنا على الابتكار بسرعة وتحقيق نتائج أفضل.",
+        handle: "@samuel.lee"
+      }
+    ],
+    hebrew: [
+      {
+        id: 1,
+        name: "אראב",
+        image: "https://randomuser.me/api/portraits/men/31.jpg",
+        stars: "★★★★★",
+        text: "ההצטרפות לפלטפורמה הזו הייתה ההחלטה הטובה ביותר לעסק שלי. כלי ה-AI והתמיכה האישית עזרו לי לאוטומט תהליכים!",
+        handle: "@aarav.brown"
+      },
+      {
+        id: 2,
+        name: "הינדלי ארנשו",
+        image: "https://randomuser.me/api/portraits/women/65.jpg",
+        stars: "★★★★★",
+        text: "הצ'אטבוטים החכמים וכלי העבודה שינו את כללי המשחק. ממליצה לכל עסק שרוצה לצמוח עם AI.",
+        handle: "@hindley.es"
+      },
+      {
+        id: 3,
+        name: "ויקטוריה ויירו",
+        image: "https://randomuser.me/api/portraits/women/44.jpg",
+        stars: "★★★★★",
+        text: "לוח הבקרה האנליטי של ה-AI נתן לי תובנות שלא היו לי קודם. צוות התמיכה מדהים!",
+        handle: "Femmetrain Oslo Co."
+      },
+      {
+        id: 4,
+        name: "לינה גומז",
+        image: "https://randomuser.me/api/portraits/women/68.jpg",
+        stars: "★★★★★",
+        text: "תוכניות השינוי מדהימות! קיבלתי ביטחון וכוח עם הפלטפורמה המדהימה הזו.",
+        handle: "חבר"
+      },
+      {
+        id: 5,
+        name: "באסיל נישווד",
+        image: "https://randomuser.me/api/portraits/men/33.jpg",
+        stars: "★★★★★",
+        text: "כלי ה-AI והעצות המקצועיות שומרים אותי במסלול. מעולם לא הרגשתי נתמך יותר במסע העסקי שלי!",
+        handle: "מייסד שותף Grandcoz"
+      },
+      {
+        id: 6,
+        name: "סמואל לי",
+        image: "https://randomuser.me/api/portraits/men/45.jpg",
+        stars: "★★★★★",
+        text: "פלטפורמה יוצאת דופן! מגוון כלי ה-AI עזרו לצוות שלנו לחדש מהר יותר ולהשיג תוצאות טובות יותר.",
+        handle: "@samuel.lee"
+      }
+    ]
+  };
+  const testimonials = testimonialsData[language];
 
   // Auto-slide functionality
   useEffect(() => {
@@ -123,7 +310,7 @@ export default function HomePage() {
   const { theme } = useTheme();
 
   return (
-    <>
+  <div dir={isRTL ? "rtl" : "ltr"}>
       <section
         className="w-full h-screen flex items-center px-4 pt-16 md:pt-20 overflow-hidden relative"
         style={{
@@ -149,31 +336,16 @@ export default function HomePage() {
         {/* Left: Text Content */}
         <div className="flex-1 flex flex-col justify-start items-center z-10 max-w-full w-full mx-auto pl-8 md:pl-0 pt-8 mt-0">
           <div className="mb-4">
-            <span className="text-[#27bdb5] bg-[#27bdb514] rounded-full px-4 py-1 text-base font-medium tracking-wide ">
-              Discover AI Tools
-            </span>
+             
           </div>
           <h1 className="font-extrabold mb-6 text-center text-white text-4xl sm:text-5xl md:text-6xl lg:text-6xl leading-tight max-w-6xl">
-            Your one-stop hub for <br />
-            <span
-              style={{
-                background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                color: 'transparent',
-                fontWeight: 'bold',
-                display: 'inline-block',
-              }}
-            >
-              AI
-            </span> powered solutions & automation.
+            {translations.heroTitle}
           </h1>
           <p
             className="mb-8 text-center text-lg max-w-lg"
             style={{ color: theme === 'dark' ? 'white' : 'white' }}
           >
-            Find, compare, and utilize the top AI tools designed for productivity, automation, content creation, analytics, and beyond everything you need, all in one platform.<br />
+            {translations.heroDesc}<br />
           </p>
           <div className="flex justify-center mb-8 mt-4 w-full">
             <button
@@ -187,7 +359,7 @@ export default function HomePage() {
                 }
               }
             >
-              Explore Now
+              {translations.explore}
             </button>
           </div>
         </div>
@@ -212,30 +384,25 @@ export default function HomePage() {
         {/* Right: Text Content */}
         <div className="flex-1 max-w-xl pr-4 md:pr-8 flex flex-col justify-center">
           <div className="text-[rgb(59,28,10)] text-sm font-semibold mb-2 tracking-wider">
-            WHO WE ARE
+            {translations.whoWeAre}
           </div>
           <h2
             className="text-3xl md:text-4xl font-extrabold mb-4"
             style={{ color: theme === 'dark' ? 'white' : 'brown' }}
           >
-            Empowering the Future with <span style={{ color: theme === 'dark' ? '#d6ab88' : '#d6ab88' }}>AI Innovation</span>
+            {translations.empower}
           </h2>
           <p
             className={`${theme === 'dark' ? 'text-white' : 'text-black'
               } text-base md:text-lg mb-6 text-justify`}
           >
-            At the heart of our mission is the belief that artificial intelligence should be
-            understandable, accessible, and impactful. We specialize in bridging the gap between
-            cutting-edge AI technologies and real-world applications — helping individuals and
-            businesses thrive in the era of automation, data, and smart decision-making.
+            {translations.about}
           </p>
           <p
             className={`${theme === 'dark' ? 'text-white' : 'text-black'
               } text-base md:text-lg mb-6 text-justify`}
           >
-            From startups to enterprises, we guide our partners in discovering the right AI solutions,
-            integrating them seamlessly, and unlocking their full potential. We are not just a platform —
-            we are your strategic partner in navigating the AI revolution with confidence and clarity.
+            {translations.about2}
           </p>
           <button
             onClick={() => handleNavigation('/about-us')}
@@ -248,7 +415,7 @@ export default function HomePage() {
               }
             }
           >
-            Learn More About Us
+            {translations.learnMore}
           </button>
         </div>
       </section>
@@ -265,73 +432,48 @@ export default function HomePage() {
             className="text-3xl md:text-4xl font-extrabold text-center mb-12"
             style={{ color: 'rgb(59,28,10)' }}
           >
-            OUR SERVICE
+            {translations.ourService}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {[
-              {
-                title: 'Content Generation',
-                desc: 'Generate high-quality written content for blogs, marketing, and more with advanced AI tools.'
-              },
-              {
-                title: 'Image & Design Tools',
-                desc: 'Create stunning images, graphics, and designs using AI-powered creativity and automation.'
-              },
-              {
-                title: 'AI Chatbots & Virtual Assistants',
-                desc: 'Automate customer support and engagement with intelligent chatbots and virtual assistants.'
-              },
-              {
-                title: 'AI Code Assistants',
-                desc: 'Boost your coding productivity with AI-powered code completion, review, and generation.'
-              },
-              {
-                title: 'Data & Analytics',
-                desc: 'Analyze data, generate insights, and forecast trends for smarter business decisions.'
-              },
-              {
-                title: 'AI Voice & Video Tools',
-                desc: 'Transform audio and video content with AI-driven editing, enhancement, and automation.'
-              }
-            ].map((service, i) => (
-              <div key={i} className="flex items-start">
-                {/* Circle */}
-                <div
-                  className="flex items-center justify-center rounded-full mr-4"
-                  style={{
-                    backgroundColor: 'rgb(59,28,10)',
-                    width: '56px',
-                    height: '56px',
-                    fontWeight: '700',
-                    fontSize: '1.25rem',
-                    minWidth: '56px',
-                    minHeight: '56px',
-                    lineHeight: '56px',
-                    textAlign: 'center',
-                    userSelect: 'none',
-                  }}
-                >
-                  <span style={{ color: 'rgb(219, 158, 111)' }}>{i < 9 ? `0${i + 1}` : i + 1}</span>
-                </div>
-                {/* Text */}
-                <div>
+            {services.map((service, i) => (
+                <div key={i} className="flex items-start">
+                  {/* Circle */}
                   <div
-                    className="text-lg font-bold mb-1"
-                    style={{ color: theme === 'dark' ? 'white' : 'brown' }}
+                    className="flex items-center justify-center rounded-full mr-4"
+                    style={{
+                      backgroundColor: 'rgb(59,28,10)',
+                      width: '56px',
+                      height: '56px',
+                      fontWeight: '700',
+                      fontSize: '1.25rem',
+                      minWidth: '56px',
+                      minHeight: '56px',
+                      lineHeight: '56px',
+                      textAlign: 'center',
+                      userSelect: 'none',
+                    }}
                   >
-                    {service.title}
+                    <span style={{ color: 'rgb(219, 158, 111)' }}>{i < 9 ? `0${i + 1}` : i + 1}</span>
                   </div>
-                  <p
-                    className="text-sm"
-                    style={{ color: theme === 'dark' ? '#d6ab88' : 'brown' }}
-                  >
-                    {service.desc}
-                  </p>
+                  {/* Text */}
+                  <div>
+                    <div
+                      className="text-lg font-bold mb-1"
+                      style={{ color: theme === 'dark' ? 'white' : 'brown' }}
+                    >
+                      {service.title}
+                    </div>
+                    <p
+                      className="text-sm"
+                      style={{ color: theme === 'dark' ? '#d6ab88' : 'brown' }}
+                    >
+                      {service.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
         </div>
       </section>
 
@@ -349,13 +491,13 @@ export default function HomePage() {
             className="text-3xl md:text-4xl font-extrabold mb-2"
             style={{ color: theme === 'dark' ? 'white' : 'brown' }}
           >
-            Trusted Partners
+            {translations.trusted}
           </h2>
           <p
             className="mb-8 text-lg"
             style={{ color: theme === 'dark' ? 'white' : 'black' }}
           >
-            We proudly collaborate with industry leaders to bring you the best.
+            {translations.trustedDesc}
           </p>
 
           {/* Scrolling container */}
@@ -403,7 +545,7 @@ export default function HomePage() {
 
       <section className="w-full py-20 px-4" style={{ background: 'rgb(219, 158, 111)' }}>
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12" style={{ color: theme === 'dark' ? 'white' : 'brown' }}>What Our Users Say</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12" style={{ color: theme === 'dark' ? 'white' : 'brown' }}>{translations.whatUsersSay}</h2>
           {/* Carousel Container with 3-card scrolling effect */}
           <div className="relative">
             <div className="flex justify-center items-center gap-8 px-16 mb-8 overflow-hidden" style={{ minHeight: '340px' }}>
@@ -482,17 +624,14 @@ export default function HomePage() {
               className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight"
               style={{ color: theme === 'dark' ? 'white' : 'brown' }}
             >
-              Empower Your Workflow <br /> with Intelligent AI
+              {translations.empowerWorkflow}
             </h2>
 
             <p
               className="text-lg leading-relaxed mb-10 text-justify"
               style={{ color: theme === 'dark' ? 'white' : 'black' }}
             >
-              From automation to analytics, explore AI tools designed to revolutionize how you work.
-              Discover curated solutions tailored for creators, teams, and enterprises—built to adapt,
-              learn, and scale with your needs. Enhance productivity, optimize decisions, and stay ahead
-              with smart technology that evolves with you.
+              {translations.empowerDesc}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -507,7 +646,7 @@ export default function HomePage() {
                   }
                 }
               >
-                Explore Tools
+                {translations.exploreTools}
               </button>
               <button
                 onClick={() => handleNavigation('/about-us')}
@@ -520,7 +659,7 @@ export default function HomePage() {
                   }
                 }
               >
-                Learn More &rarr;
+                {translations.learnMoreArrow}
               </button>
             </div>
           </div>
@@ -541,6 +680,6 @@ export default function HomePage() {
       </section>
 
 
-    </>
+  </div>
   );
 } 
