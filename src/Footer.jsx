@@ -89,7 +89,7 @@ export default function Footer({ theme }) {
           <div className={`${theme === "dark" 
             ? `flex flex-col ${isRTL ? 'items-end text-right' : 'items-start text-left'}` 
             : `flex flex-col ${isRTL ? 'items-end text-right text-black' : 'items-start text-left text-black'}`} w-full md:w-auto mb-8 md:mb-0`}>
-            <h3 className="text-xl font-bold mb-6 text-[#312525]">{translations.footer_our_services || "Our Services"}</h3>
+            <h3 className="text-xl font-bold mb-6 text-[#312525]">{translations.footer_our_services || translations.header_services || "Our Services"}</h3>
             <ul className="space-y-3">
               {[
                 { name: translations.header_service_content || "Content Generation", path: "/services/content-code-generation" },

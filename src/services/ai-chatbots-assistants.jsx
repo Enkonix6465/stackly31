@@ -5,7 +5,7 @@ import travelPng from '../assets/travel.jpg';
 import medicalPng from '../assets/medical.jpg';
 import educationPng from '../assets/education.jpg';
 import { motion } from "framer-motion";
-import heroVideo from "../assets/imagehero.mp4";
+import heroVideo from "../assets/chatbot.mp4";
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
 import howItWorksImg from '../assets/Content & Code Generation1.webp';

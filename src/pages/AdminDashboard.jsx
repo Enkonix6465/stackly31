@@ -49,13 +49,36 @@ ChartJS.register(
 );
 
 /* ------------- Dummy data ------------- */
+
+const useUserCount = () => {
+  const [userCount, setUserCount] = React.useState(0);
+  React.useEffect(() => {
+    const fetchCount = () => {
+      const stored = localStorage.getItem('users');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) setUserCount(parsed.length);
+          else setUserCount(0);
+        } catch {
+          setUserCount(0);
+        }
+      } else {
+        setUserCount(0);
+      }
+    };
+    fetchCount();
+    window.addEventListener('storage', fetchCount);
+    return () => window.removeEventListener('storage', fetchCount);
+  }, []);
+  return userCount;
+};
+
 const quickStats = {
-  totalUsers: 12483,
   revenue: 987423,
   activeServices: 6,
   tickets: 12,
 };
-
 const recentOrders = [
   {
     id: "#A100",
@@ -81,20 +104,12 @@ const recentOrders = [
 ];
 
 const serviceCards = [
-  { id: 1, title: "Automation & Efficiency", icon: <BsLightning size={28} /> },
-  { id: 2, title: "Data Analysis & Insights", icon: <BsGraphUp size={28} /> },
-  {
-    id: 3,
-    title: "Content Generation (Gen-AI)",
-    icon: <BsPalette size={28} />,
-  },
-  { id: 4, title: "Enhanced HCI", icon: <BsRobot size={28} /> },
-  {
-    id: 5,
-    title: "Personalized Experiences",
-    icon: <BsPersonCheck size={28} />,
-  },
-  { id: 6, title: "Industry Specific Apps", icon: <BsBriefcase size={28} /> },
+  { id: 1, title: "AI chatbotsassistants", icon: <BsLightning size={28} /> },
+  { id: 2, title: "AI code assistants", icon: <BsGraphUp size={28} /> },
+  { id: 3, title: "AI voice and vedio tools", icon: <BsPalette size={28} /> },
+  { id: 4, title: "Automation workflow tools", icon: <BsRobot size={28} /> },
+  { id: 5, title: "Content generation", icon: <BsPersonCheck size={28} /> },
+  { id: 6, title: "Data analytics", icon: <BsBriefcase size={28} /> },
 ];
 
 /* ------------- main ------------- */
@@ -119,10 +134,10 @@ const AdminDashboard = () => {
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl p-1"
+          className="p-1"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatCard label="Total Users" value={quickStats.totalUsers} theme={theme} />
+            <StatCard label="Total Users" value={useUserCount()} theme={theme} />
             <StatCard label="Revenue (USD)" value={`$${quickStats.revenue.toLocaleString()}`} theme={theme} />
             <StatCard label="Active Services" value={quickStats.activeServices} theme={theme} />
             <StatCard label="Support Tickets" value={quickStats.tickets} theme={theme} />
@@ -131,7 +146,7 @@ const AdminDashboard = () => {
 
         {/* SERVICES GRID */}
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-[#19e6f7]">Services</h2>
+          <h2 className="text-2xl font-bold mb-4" style={{background: 'linear-gradient(90deg, #8B5C2A, #D2B48C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>Services</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {serviceCards.map((s) => (
               <ServiceCard key={s.id} {...s} theme={theme} />
@@ -141,13 +156,11 @@ const AdminDashboard = () => {
 
         {/* ORDERS TABLE */}
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-[#19e6f7]">
-            Recent Orders
-          </h2>
+          <h2 className="text-2xl font-bold mb-4" style={{background: 'linear-gradient(90deg, #8B5C2A, #D2B48C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>Recent Orders</h2>
           <div className="overflow-x-auto">
-            <table className={`min-w-full rounded-xl ${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'}`}>
+            <table className={`min-w-full ${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'}`}>
               <thead>
-                <tr className={`text-left border-b ${theme === 'dark' ? 'border-white/10' : 'border-white/10'}`}>
+                <tr className={`text-left`}>
                   <th className="p-4 text-white">Order ID</th>
                   <th className="p-4 text-white">User</th>
                   <th className="p-4 text-white">Service</th>
@@ -159,7 +172,7 @@ const AdminDashboard = () => {
                 {recentOrders.map((o) => (
                   <tr
                     key={o.id}
-                    className="border-b border-white/5 hover:bg-white/5"
+                    className="hover:bg-white/5"
                   >
                     <td className={`p-4 ${theme === 'dark' ? 'text-white' : 'text-white'}`}>{o.id}</td>
                     <td className={`p-4 ${theme === 'dark' ? 'text-white' : 'text-white'}`}>{o.user}</td>
@@ -177,34 +190,38 @@ const AdminDashboard = () => {
 
         {/* ANALYTICS CHARTS */}
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-[#19e6f7]">Analytics</h2>
+          <h2 className="text-2xl font-bold mb-4" style={{background: 'linear-gradient(90deg, #8B5C2A, #D2B48C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>Analytics</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Revenue Trend (Line) */}
+            {/* Area Chart 1 */}
             <motion.div
               whileHover={{ scale: 1.01 }}
-              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}
+              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur p-4`} 
             >
               <Line
-                data={lineData}
-                options={commonOptions("Revenue Trend (USD)")}
+                data={areaData1}
+                options={areaOptions("User Growth (Area)")}
               />
             </motion.div>
-
-            {/* Service Usage (Bar) */}
+            {/* Area Chart 2 */}
             <motion.div
               whileHover={{ scale: 1.01 }}
-              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}
+              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur p-4`} 
             >
-              <Bar data={barData} options={commonOptions("Service Usage")} />
+              <Line
+                data={areaData2}
+                options={areaOptions("Revenue (Area)")}
+              />
             </motion.div>
-
-            {/* Traffic Sources (Doughnut) */}
+            {/* Area Chart 3 */}
             <motion.div
               whileHover={{ scale: 1.01 }}
-              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}
+              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur p-4`} 
             >
-              <Doughnut data={doughnutData} options={doughnutOptions} />
+              <Line
+                data={areaData3}
+                options={areaOptions("Engagement (Area)")}
+              />
             </motion.div>
           </div>
         </section>
@@ -215,7 +232,6 @@ const AdminDashboard = () => {
           <div className="lg:col-span-2">
             <ActivityLog theme={theme} />
           </div>
-
           {/* Right: Chart Gallery */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -224,16 +240,15 @@ const AdminDashboard = () => {
             className="space-y-6"
           >
             {/* Mini Doughnut */}
-            <div className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}>
-              <h4 className="text-sm text-[#19e6f7] mb-2">Traffic Sources</h4>
+            <div className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur p-4`}>
+              <h4 className="text-sm mb-2" style={{background: 'linear-gradient(90deg, #8B5C2A, #D2B48C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>Traffic Sources</h4>
               <div className="h-23">
                 <Doughnut data={miniDoughnut} options={miniOpts} />
               </div>
             </div>
-
             {/* Mini Bar */}
-            <div className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}>
-              <h4 className="text-sm text-[#19e6f7] mb-2">Weekly Sign-ups</h4>
+            <div className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur p-4`}>
+              <h4 className="text-sm mb-2" style={{background: 'linear-gradient(90deg, #8B5C2A, #D2B48C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>Weekly Sign-ups</h4>
               <div className="h-23">
                 <Bar data={miniBar} options={miniOpts} />
               </div>
@@ -243,15 +258,15 @@ const AdminDashboard = () => {
       </main>
     </div>
   );
-};
+}
 
 /* ------------- sub-components ------------- */
 const StatCard = ({ label, value, theme }) => (
   <motion.div
     whileHover={{ scale: 1.03 }}
-    className={`rounded-2xl p-6 border border-[#19e6f7]/20 shadow ${theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-black'}`}
+    className={`p-6 shadow ${theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-black'}`}
   >
-    <p className="text-sm text-[#19e6f7]">{label}</p>
+    <p className="text-sm" style={{background: 'linear-gradient(90deg, #8B5C2A, #D2B48C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>{label}</p>
     <p className={`text-2xl font-bold text-white`}>{value}</p>
   </motion.div>
 );
@@ -259,9 +274,9 @@ const StatCard = ({ label, value, theme }) => (
 const ServiceCard = ({ title, icon, theme }) => (
   <motion.div
     whileHover={{ y: -6 }}
-    className={`rounded-2xl p-6 border border-[#19e6f7]/20 hover:border-[#19e6f7]/50 transition cursor-pointer ${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'}`}
+    className={`p-6 transition cursor-pointer ${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'}`}
   >
-    <div className="text-[#19e6f7] mb-3">{icon}</div>
+    <div className="mb-3" style={{background: 'linear-gradient(90deg, #8B5C2A, #D2B48C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>{icon}</div>
     <h3 className={`font-semibold text-white`}>{title}</h3>
   </motion.div>
 );
@@ -281,70 +296,63 @@ const StatusBadge = ({ status }) => {
 
 /* --------------  NEW FULL-WIDTH ACTIVITY LOG  -------------- */
 const ActivityLog = ({ theme }) => {
-  /* tiny random spark-line data */
-  const sparkData = {
-    labels: [...Array(8)].map((_, i) => `${i}h`),
-    datasets: [
-      {
-        label: "Events",
-        data: [3, 5, 2, 6, 4, 7, 5, 8],
-        borderColor: "#19e6f7",
-        backgroundColor: "rgba(25, 230, 247, 0.15)",
-        fill: true,
-        tension: 0.4,
-        pointRadius: 0,
-      },
-    ],
-  };
+  // Fetch user data from localStorage
+  const [users, setUsers] = React.useState([]);
 
-  const sparkOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { display: false },
-      y: { display: false },
-    },
-  };
+  React.useEffect(() => {
+    const fetchUsers = () => {
+      const stored = localStorage.getItem('users');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) setUsers(parsed);
+        } catch (e) {
+          setUsers([]);
+        }
+      } else {
+        setUsers([]);
+      }
+    };
+    fetchUsers();
+    window.addEventListener('storage', fetchUsers);
+    return () => window.removeEventListener('storage', fetchUsers);
+  }, []);
 
-  const logs = [
-    { text: "New user \"David\" signed up", time: "12:34 PM" },
-    { text: "Monthly report generated", time: "11:05 AM" },
-    { text: "Gen-AI service updated to v2.3", time: "09:21 AM" },
-    { text: "Ticket #T101 resolved", time: "08:57 AM" },
-    { text: "Model deployment finished", time: "08:12 AM" },
-    { text: "Order #A103 placed by \"Eva\"", time: "07:45 AM" },
-  ];
 
   return (
     <motion.section
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-6 border border-[#19e6f7]/20`}
+      className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur p-6`}
     >
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-        <h3 className="text-lg font-bold text-[#19e6f7]">Activity Log</h3>
-        <div className="h-16 w-32 mt-4 md:mt-0">
-          <Line data={sparkData} options={sparkOptions} />
-        </div>
-      </div>
-
-      {/* timeline */}
-      <div className="relative space-y-4">
-        {logs.map((l, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="flex items-start gap-4"
-          >
-            <div className="flex-1">
-              <p className="text-sm text-white">{l.text}</p>
-              <p className="text-xs text-gray-400">{l.time}</p>
-            </div>
-          </motion.div>
-        ))}
+      <h3 className="text-lg font-bold mb-4" style={{background: 'linear-gradient(90deg, #8B5C2A, #D2B48C)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>User Details</h3>
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-white">
+          <thead>
+            <tr>
+              <th className="px-4 py-2 text-left">First Name</th>
+              <th className="px-4 py-2 text-left">Last Name</th>
+              <th className="px-4 py-2 text-left">Email</th>
+              <th className="px-4 py-2 text-left">Registration Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.length === 0 ? (
+              <tr>
+                <td colSpan={4} className="px-4 py-4 text-center text-gray-400">No users found.</td>
+              </tr>
+            ) : (
+              users.map((user, idx) => (
+                <tr key={idx} className="border-b border-[#D2B48C]/20">
+                  <td className="px-4 py-2">{user.firstName}</td>
+                  <td className="px-4 py-2">{user.lastName}</td>
+                  <td className="px-4 py-2">{user.email}</td>
+                  <td className="px-4 py-2">{user.registrationTime}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </motion.section>
   );
@@ -357,59 +365,83 @@ const commonOptions = (title) => ({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: { labels: { color: "#19e6f7" } },
-    title: { display: true, text: title, color: "#19e6f7", font: { size: 14 } },
+    legend: { labels: { color: "#8B5C2A" } },
+    title: { display: true, text: title, color: "#8B5C2A", font: { size: 14 } },
   },
   scales: {
-    x: { ticks: { color: "#19e6f7" }, grid: { color: "#374151" } },
-    y: { ticks: { color: "#19e6f7" }, grid: { color: "#374151" } },
+    x: { ticks: { color: "#8B5C2A" }, grid: { color: "#D2B48C" } },
+    y: { ticks: { color: "#8B5C2A" }, grid: { color: "#D2B48C" } },
   },
 });
 
-const lineData = {
+
+// Area Chart 1: User Growth
+const areaData1 = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  datasets: [
+    {
+      label: "Users",
+      data: [1000, 2000, 3000, 4000, 5000, 6000],
+      borderColor: "#8B5C2A",
+      backgroundColor: "rgba(210, 180, 140, 0.3)",
+      fill: true,
+      tension: 0.4,
+    },
+  ],
+};
+
+// Area Chart 2: Revenue
+const areaData2 = {
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
   datasets: [
     {
       label: "Revenue",
       data: [12000, 19000, 15000, 25000, 22000, 30000],
-      borderColor: "#19e6f7",
-      backgroundColor: "rgba(25, 230, 247, 0.2)",
-      tension: 0.3,
+      borderColor: "#A0522D",
+      backgroundColor: "rgba(160, 82, 45, 0.3)",
+      fill: true,
+      tension: 0.4,
     },
   ],
 };
 
-const barData = {
-  labels: serviceCards.map((s) => s.title.split(" ")[0]),
+// Area Chart 3: Engagement
+const areaData3 = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
   datasets: [
     {
-      label: "Requests",
-      data: [432, 321, 287, 198, 176, 254],
-      backgroundColor: "#19e6f7",
+      label: "Engagement",
+      data: [500, 800, 1200, 900, 1400, 1600],
+      borderColor: "#D2B48C",
+      backgroundColor: "rgba(210, 180, 140, 0.3)",
+      fill: true,
+      tension: 0.4,
     },
   ],
 };
 
-const doughnutData = {
-  labels: ["Direct", "Organic", "Referral", "Social"],
-  datasets: [
-    {
-      data: [35, 30, 20, 15],
-      backgroundColor: ["#19e6f7", "#27bdb5", "#374151", "#6b7280"],
-      borderWidth: 0,
-    },
-  ],
-};
+const areaOptions = (title) => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { labels: { color: "#8B5C2A" } },
+    title: { display: true, text: title, color: "#8B5C2A", font: { size: 16 } },
+  },
+  scales: {
+    x: { ticks: { color: "#8B5C2A" }, grid: { color: "#D2B48C" } },
+    y: { ticks: { color: "#8B5C2A" }, grid: { color: "#D2B48C" } },
+  },
+});
 
 const doughnutOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: { position: "bottom", labels: { color: "#19e6f7" } },
+  legend: { position: "bottom", labels: { color: "#8B5C2A" } },
     title: {
       display: true,
       text: "Traffic Sources",
-      color: "#19e6f7",
+  color: "#8B5C2A",
       font: { size: 14 },
     },
   },
@@ -421,7 +453,7 @@ const miniDoughnut = {
   datasets: [
     {
       data: [45, 35, 20],
-      backgroundColor: ["#19e6f7", "#27bdb5", "#374151"],
+  backgroundColor: ["#8B5C2A", "#D2B48C", "#A0522D"],
       borderWidth: 0,
     },
   ],
@@ -433,7 +465,7 @@ const miniBar = {
     {
       label: "Sign-ups",
       data: [12, 19, 8, 15, 22, 18, 25],
-      backgroundColor: "#19e6f7",
+  backgroundColor: "#8B5C2A",
       borderRadius: 4,
     },
   ],
