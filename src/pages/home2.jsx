@@ -523,12 +523,15 @@ const SecondHome = () => {
         </div>
       </section>
       {/* Why Choose Us */}
-      <section className="py-20 px-4" style={{ background: '#f7f3ed' }}>
-        <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4" style={{ color: '#3b1c0a' }}>
+      <section
+        className="py-20 px-4"
+        style={{ background: theme === 'dark' ? '#121212' : '#f7f3ed' }}
+      >
+        <div className={`max-w-7xl mx-auto flex flex-col items-center ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4">
             {language === "arabic" ? "لماذا تختارنا" : language === "hebrew" ? "למה לבחור בנו" : "Why Choose Us"}
           </h2>
-          <p className="text-lg text-center mb-10" style={{ color: '#3b1c0a', maxWidth: 600 }}>
+          <p className="text-lg text-center mb-10" style={{ maxWidth: 600 }}>
             {language === "arabic"
               ? "اكتشف كيف تساعد منصتنا المدعومة بالذكاء الاصطناعي الشركات على أتمتة المهام، واكتساب الرؤى، والتعاون بشكل أكثر ذكاءً. ميزاتنا مصممة للإنتاجية والأمان والنمو."
               : language === "hebrew"
@@ -721,20 +724,9 @@ const SecondHome = () => {
           transform: scale(1.1);
         }
       `}</style>
-      <section className="py-16 px-0" style={{ background: '#f7f3ed' }}>
+  <section className="py-16 px-0" style={{ background: 'linear-gradient(135deg, #63342e 0%, #c58d6a 100%)' }}>
         <div className="w-full flex flex-col items-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-8 text-center">
-            <span className="text-black">Meet Our </span>
-            <span style={{
-              background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              fontWeight: 'bold',
-              display: 'inline-block',
-            }}>Experts</span>
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-8 text-center text-black">Meet Our Experts</h2>
           <div
             className={`w-full flex justify-center items-end mb-8 relative ${showHorizontal ? 'flex-row items-center' : ''}`}
             style={showHorizontal ? {
@@ -846,19 +838,24 @@ const SecondHome = () => {
       </section>
 
       {/* Impact Metrics Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section
+        className="py-16 px-4"
+        style={{ background: theme === 'dark' ? '#121212' : '#fff' }}
+      >
+        <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
           <div>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-black leading-tight">
+            <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 leading-tight ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               {language === "arabic"
                 ? "تمكين الشركات بالحلول الذكية للذكاء الاصطناعي"
                 : language === "hebrew"
                 ? "מעצימים עסקים עם פתרונות AI"
-                : <>Empowering Businesses<br />with AI Solutions</>}
+                : <>
+                    Empowering Businesses<br />with AI Solutions
+                  </>}
             </h2>
           </div>
           <div>
-            <p className="mb-6 text-black text-lg">
+            <p className={`mb-6 text-lg ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               {language === "arabic"
                 ? "من الأتمتة الذكية إلى التحليلات المتقدمة، تساعد منصتنا الشركات على تبسيط العمليات، وزيادة الإنتاجية، وفتح فرص نمو جديدة."
                 : language === "hebrew"
@@ -870,34 +867,43 @@ const SecondHome = () => {
             </button>
           </div>
         </div>
-        <ImpactMetricsNumbers
-          labels={{
-            clientSatisfaction:
-              language === "arabic"
-                ? "رضا العملاء"
-                : language === "hebrew"
-                ? "שביעות רצון לקוחות"
-                : "Client Satisfaction",
-            yearsExperience:
-              language === "arabic"
-                ? "سنوات خبرة الذكاء الاصطناعي"
-                : language === "hebrew"
-                ? "שנות ניסיון ב-AI"
-                : "Years of AI Experience",
-            businessClients:
-              language === "arabic"
-                ? "عملاء الأعمال"
-                : language === "hebrew"
-                ? "לקוחות עסקיים"
-                : "Business Clients",
-            projectsDelivered:
-              language === "arabic"
-                ? "مشاريع الذكاء الاصطناعي المنجزة"
-                : language === "hebrew"
-                ? "פרויקטי AI שסופקו"
-                : "AI Projects Delivered"
-          }}
-        />
+        <div className={theme === 'dark' ? 'text-white !text-white' : 'text-black'}>
+          <ImpactMetricsNumbers
+            labels={{
+              clientSatisfaction:
+                language === "arabic"
+                  ? "رضا العملاء"
+                  : language === "hebrew"
+                  ? "שביעות רצון לקוחות"
+                  : "Client Satisfaction",
+              yearsExperience:
+                language === "arabic"
+                  ? "سنوات خبرة الذكاء الاصطناعي"
+                  : language === "hebrew"
+                  ? "שנות ניסיון ב-AI"
+                  : "Years of AI Experience",
+              businessClients:
+                language === "arabic"
+                  ? "عملاء الأعمال"
+                  : language === "hebrew"
+                  ? "לקוחות עסקיים"
+                  : "Business Clients",
+              projectsDelivered:
+                language === "arabic"
+                  ? "مشاريع الذكاء الاصطناعي المنجزة"
+                  : language === "hebrew"
+                  ? "פרויקטי AI שסופקו"
+                  : "AI Projects Delivered"
+            }}
+          />
+        </div>
+        {theme === 'dark' && (
+          <style>{`
+            .text-white *, .text-white strong, .text-white span, .text-white p, .text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6 {
+              color: #fff !important;
+            }
+          `}</style>
+        )}
       </section>
 
       {/* Upcoming Webinars Section (Slideshow) */}
@@ -907,16 +913,19 @@ const SecondHome = () => {
   </section>
 
       {/* CTA Section  */}
-      <section className="w-full pt-8 pb-16 px-4 flex flex-col items-center justify-center">
-        <div className="max-w-3xl w-full flex flex-col items-center text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white">
+      <section
+        className="w-full pt-8 pb-16 px-4 flex flex-col items-center justify-center"
+        style={{ background: theme === 'dark' ? '#121212' : '#fff' }}
+      >
+        <div className={`max-w-3xl w-full flex flex-col items-center text-center ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
             {language === "arabic"
               ? "هل أنت مستعد لتحويل عملك؟"
               : language === "hebrew"
               ? "מוכן לשנות את העסק שלך?"
               : "Ready to Transform Your Business?"}
           </h2>
-          <p className="text-lg text-white mb-8">
+          <p className="text-lg mb-8">
             {language === "arabic"
               ? "اكتشف قوة الأتمتة والتحليلات وأدوات سير العمل المدعومة بالذكاء الاصطناعي. ابدأ رحلتك نحو عمليات أكثر ذكاءً وسرعة وكفاءة اليوم."
               : language === "hebrew"

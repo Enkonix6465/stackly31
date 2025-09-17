@@ -63,7 +63,7 @@ export default function Header({ theme, toggleTheme }) {
   return (
       <header className={
         `${theme === 'dark'
-          ? 'bg-gradient-to-r from-[#8B5C2A] via-[#A67C52] to-[#C19A6B] text-white'
+          ? 'bg-black text-white'
           : 'bg-white text-black'} w-full flex items-center justify-between px-6 md:px-12 py-4 md:py-6 shadow-2xl sticky top-0 z-50 transition-all duration-300`
       } dir={isRTL ? "rtl" : "ltr"}>
       {/* Logo */}

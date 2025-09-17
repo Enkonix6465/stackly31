@@ -176,7 +176,7 @@ const MissionSVG = () => (
       {/* Our Growth Through Years Section - Centered Image with Hexagons */}
       <section className={theme === "dark" ? "py-20 px-4 bg-[#181818] relative overflow-x-hidden" : "py-20 px-4 bg-gray-100 relative overflow-x-hidden"}>
         <div className="w-full max-w-6xl mx-auto relative z-20">
-          <h2 className={`text-4xl font-bold mb-8 text-center`} style={{ color: 'rgb(59,28,10)' }}>
+          <h2 className={`text-4xl font-bold mb-8 text-center ${theme === 'dark' ? 'text-white' : ''}`} style={theme === 'dark' ? {} : { color: 'rgb(59,28,10)' }}>
             {language === "arabic"
               ? "نموّنا عبر السنوات"
               : language === "hebrew"
@@ -325,9 +325,9 @@ const MissionSVG = () => (
       </section>
 
           {/* What Makes Us Unique Section - Creative Layout */}
-  <section className={`py-20 px-4 w-full`} style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
+  <section className={`py-20 px-4 w-full`} style={theme === 'dark' ? {background: 'black'} : {background: 'white'}}>
         <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <h2 className={`text-5xl font-extrabold mb-8 text-center text-[#312525]`}>
+          <h2 className={`text-5xl font-extrabold mb-8 text-center ${theme === 'dark' ? 'text-white' : 'text-[#312525]'}`}>
             {language === "arabic"
               ? "ما الذي يجعلنا مميزين"
               : language === "hebrew"
@@ -342,15 +342,15 @@ const MissionSVG = () => (
               : "Discover the qualities that set us apart and drive our success in the AI industry."}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
-            <div className="hexagon-creative motion-card-creative bg-white p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl">
-              <div className="font-bold text-2xl mb-2 text-[#312525]">
+            <div className="hexagon-creative motion-card-creative p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl" style={{background: 'linear-gradient(135deg, #63342e 0%, #9a644a 100%)'}}>
+              <div className="font-bold text-2xl mb-2 text-white">
                 {language === "arabic"
                   ? "خبرة مثبتة"
                   : language === "hebrew"
                   ? "מומחיות מוכחת"
                   : "Proven Expertise"}
               </div>
-              <div className="text-black text-center">
+              <div className="text-white text-center">
                 {language === "arabic"
                   ? "يتمتع فريقنا بسنوات من الخبرة العملية في تقديم حلول ذكاء اصطناعي مؤثرة عبر صناعات متنوعة."
                   : language === "hebrew"
@@ -358,15 +358,15 @@ const MissionSVG = () => (
                   : "Our team brings years of hands-on experience delivering impactful AI solutions across diverse industries."}
               </div>
             </div>
-            <div className="hexagon-creative motion-card-creative bg-white p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl">
-              <div className="font-bold text-2xl mb-2 text-[#312525]">
+            <div className="hexagon-creative motion-card-creative p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl" style={{background: 'linear-gradient(135deg, #63342e 0%, #9a644a 100%)'}}>
+              <div className="font-bold text-2xl mb-2 text-white">
                 {language === "arabic"
                   ? "حلول شاملة"
                   : language === "hebrew"
                   ? "פתרונות מקצה לקצה"
                   : "End-to-End Solutions"}
               </div>
-              <div className="text-black text-center">
+              <div className="text-white text-center">
                 {language === "arabic"
                   ? "نقدم خدمات شاملة، من الاستراتيجية والتطوير إلى النشر والدعم المستمر."
                   : language === "hebrew"
@@ -374,15 +374,15 @@ const MissionSVG = () => (
                   : "We offer comprehensive services, from strategy and development to deployment and ongoing support."}
               </div>
             </div>
-            <div className="hexagon-creative motion-card-creative bg-white p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl">
-              <div className="font-bold text-2xl mb-2 text-[#312525]">
+            <div className="hexagon-creative motion-card-creative p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl" style={{background: 'linear-gradient(135deg, #63342e 0%, #9a644a 100%)'}}>
+              <div className="font-bold text-2xl mb-2 text-white">
                 {language === "arabic"
                   ? "تركيز على العميل"
                   : language === "hebrew"
                   ? "מיקוד בלקוח"
                   : "Client-Centric Focus"}
               </div>
-              <div className="text-black text-center">
+              <div className="text-white text-center">
                 {language === "arabic"
                   ? "نخصص كل مشروع لاحتياجات عملائنا الفريدة، ونضمن قيمة ورضا قابلين للقياس."
                   : language === "hebrew"
@@ -392,15 +392,15 @@ const MissionSVG = () => (
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-10">
-            <div className="hexagon-creative motion-card-creative bg-white p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl">
-              <div className="font-bold text-2xl mb-2 text-[#312525]">
+            <div className="hexagon-creative motion-card-creative p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl" style={{background: 'linear-gradient(135deg, #63342e 0%, #9a644a 100%)'}}>
+              <div className="font-bold text-2xl mb-2 text-white">
                 {language === "arabic"
                   ? "مرن ومبتكر"
                   : language === "hebrew"
                   ? "זריז וחדשני"
                   : "Agile & Innovative"}
               </div>
-              <div className="text-black text-center">
+              <div className="text-white text-center">
                 {language === "arabic"
                   ? "نحتضن التغيير ونتكيف بسرعة ونبتكر لنحافظ على تقدم عملائنا."
                   : language === "hebrew"
@@ -408,15 +408,15 @@ const MissionSVG = () => (
                   : "We embrace change, rapidly adapting and innovating to keep our clients ahead of the curve."}
               </div>
             </div>
-            <div className="hexagon-creative motion-card-creative bg-white p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl">
-              <div className="font-bold text-2xl mb-2 text-[#312525]">
+            <div className="hexagon-creative motion-card-creative p-8 flex flex-col items-center justify-center shadow-xl rounded-2xl" style={{background: 'linear-gradient(135deg, #63342e 0%, #9a644a 100%)'}}>
+              <div className="font-bold text-2xl mb-2 text-white">
                 {language === "arabic"
                   ? "شراكات موثوقة"
                   : language === "hebrew"
                   ? "שותפויות אמינות"
                   : "Trusted Partnerships"}
               </div>
-              <div className="text-black text-center">
+              <div className="text-white text-center">
                 {language === "arabic"
                   ? "نبني علاقات طويلة الأمد قائمة على الشفافية والموثوقية والنجاح المشترك."
                   : language === "hebrew"
@@ -429,16 +429,16 @@ const MissionSVG = () => (
       </section>
 
       {/* CTA Section */}
-  <section className={`py-16 px-4 w-full`} style={{background: 'white'}}>
+  <section className={`py-16 px-4 w-full`} style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             {language === "arabic"
               ? "هل أنت مستعد لتحويل عملك؟"
               : language === "hebrew"
               ? "מוכן לשנות את העסק שלך?"
               : "Ready to Transform Your Business?"}
           </h2>
-          <p className={`text-lg mb-8 max-w-2xl text-black`}>
+          <p className={`text-lg mb-8 max-w-2xl text-white`}>
             {language === "arabic"
               ? "تواصل معنا اليوم لاكتشاف كيف يمكن لحلول الذكاء الاصطناعي لدينا أن تدفع الابتكار والكفاءة والنمو لمؤسستك."
               : language === "hebrew"

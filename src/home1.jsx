@@ -338,7 +338,7 @@ export default function HomePage() {
           <div className="mb-4">
              
           </div>
-          <h1 className="font-extrabold mb-6 text-center text-white text-4xl sm:text-5xl md:text-6xl lg:text-6xl leading-tight max-w-6xl">
+          <h1 className="font-extrabold mb-6 text-center text-white text-4xl sm:text-5xl md:text-6xl lg:text-6xl leading-tight max-w-6xl" style={{ color: 'white' }}>
             {translations.heroTitle}
           </h1>
           <p
@@ -351,13 +351,10 @@ export default function HomePage() {
             <button
               onClick={() => handleNavigation('/services')}
               className="font-bold rounded-full px-10 py-3 text-lg shadow-lg"
-              style={theme === 'dark'
-                ? { background: 'white', color: 'black' }
-                : {
-                  background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
-                  color: 'white'
-                }
-              }
+              style={{
+                background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
+                color: 'white'
+              }}
             >
               {translations.explore}
             </button>
@@ -368,7 +365,7 @@ export default function HomePage() {
       <section
         className="w-full py-16 px-4 flex flex-col md:flex-row items-stretch justify-center gap-8 mx-auto"
         style={{
-          background: 'white',
+          background: theme === 'dark' ? 'black' : 'white',
           color: theme === 'dark' ? 'white' : 'black',
         }}
       >
@@ -383,12 +380,10 @@ export default function HomePage() {
 
         {/* Right: Text Content */}
         <div className="flex-1 max-w-xl pr-4 md:pr-8 flex flex-col justify-center">
-          <div className="text-[rgb(59,28,10)] text-sm font-semibold mb-2 tracking-wider">
-            {translations.whoWeAre}
-          </div>
+           
           <h2
             className="text-3xl md:text-4xl font-extrabold mb-4"
-            style={{ color: theme === 'dark' ? 'white' : 'brown' }}
+            style={{ color: 'brown' }}
           >
             {translations.empower}
           </h2>
@@ -407,13 +402,10 @@ export default function HomePage() {
           <button
             onClick={() => handleNavigation('/about-us')}
             className="font-bold rounded-full px-6 py-2 text-base shadow transition-colors border-none outline-none mt-auto"
-            style={theme === 'dark'
-              ? { background: 'white', color: 'black' }
-              : {
-                background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
-                color: 'white'
-              }
-            }
+            style={{
+              background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
+              color: 'white'
+            }}
           >
             {translations.learnMore}
           </button>
@@ -424,7 +416,7 @@ export default function HomePage() {
         className="w-full py-20 px-4 transition-colors duration-300"
         style={{
           background: 'rgb(219, 158, 111)',
-          color: theme === 'dark' ? 'white' : 'black',
+          color: 'black',
         }}
       >
         <div className="max-w-6xl mx-auto">
@@ -460,13 +452,13 @@ export default function HomePage() {
                   <div>
                     <div
                       className="text-lg font-bold mb-1"
-                      style={{ color: theme === 'dark' ? 'white' : 'brown' }}
+                      style={{ color: 'brown' }}
                     >
                       {service.title}
                     </div>
                     <p
                       className="text-sm"
-                      style={{ color: theme === 'dark' ? '#d6ab88' : 'brown' }}
+                      style={{ color: 'brown' }}
                     >
                       {service.desc}
                     </p>
@@ -482,14 +474,14 @@ export default function HomePage() {
       <section
         className="w-full py-16 px-4 transition-colors duration-300"
         style={{
-          background: 'white',
+          background: theme === 'dark' ? 'black' : 'white',
           color: theme === 'dark' ? 'white' : 'black',
         }}
       >
         <div className="max-w-6xl mx-auto text-center">
           <h2
             className="text-3xl md:text-4xl font-extrabold mb-2"
-            style={{ color: theme === 'dark' ? 'white' : 'brown' }}
+            style={{ color: 'brown' }}
           >
             {translations.trusted}
           </h2>
@@ -545,7 +537,7 @@ export default function HomePage() {
 
       <section className="w-full py-20 px-4" style={{ background: 'rgb(219, 158, 111)' }}>
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12" style={{ color: theme === 'dark' ? 'white' : 'brown' }}>{translations.whatUsersSay}</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12" style={{ color: 'brown' }}>{translations.whatUsersSay}</h2>
           {/* Carousel Container with 3-card scrolling effect */}
           <div className="relative">
             <div className="flex justify-center items-center gap-8 px-16 mb-8 overflow-hidden" style={{ minHeight: '340px' }}>
@@ -612,7 +604,7 @@ export default function HomePage() {
       <section
         className="w-full px-4 py-20 md:py-28 transition-colors duration-300"
         style={{
-          background: 'white',
+          background: theme === 'dark' ? 'black' : 'white',
           color: theme === 'dark' ? 'white' : 'black',
         }}
       >
@@ -622,7 +614,7 @@ export default function HomePage() {
           <div>
             <h2
               className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight"
-              style={{ color: theme === 'dark' ? 'white' : 'brown' }}
+              style={{ color: 'brown' }}
             >
               {translations.empowerWorkflow}
             </h2>
@@ -638,26 +630,20 @@ export default function HomePage() {
               <button
                 onClick={() => handleNavigation('/services')}
                 className="font-bold rounded-lg px-8 py-3 text-base shadow transition-colors"
-                style={theme === 'dark'
-                  ? { background: 'white', color: 'black' }
-                  : {
-                    background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
-                    color: 'white'
-                  }
-                }
+                style={{
+                  background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
+                  color: 'white'
+                }}
               >
                 {translations.exploreTools}
               </button>
               <button
                 onClick={() => handleNavigation('/about-us')}
                 className="font-bold rounded-lg px-8 py-3 text-base shadow transition-colors"
-                style={theme === 'dark'
-                  ? { background: 'white', color: 'black' }
-                  : {
-                    background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
-                    color: 'white'
-                  }
-                }
+                style={{
+                  background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)',
+                  color: 'white'
+                }}
               >
                 {translations.learnMoreArrow}
               </button>
