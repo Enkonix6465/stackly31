@@ -120,19 +120,59 @@ export default function Footer({ theme }) {
             <h3 className="text-xl font-bold mb-6 text-[#312525]">{translations.footer_get_in_touch || "Get In Touch"}</h3>
             <div className="space-y-4 mb-6 w-full max-w-xs md:max-w-xs">
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
-                <FaPhoneAlt className="mr-3 text-[#27bdb5]" />
+                <span
+                  className="mr-3"
+                  style={{
+                    background: 'linear-gradient(to bottom, #63342e, #d6ab88, #9a644a)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    display: 'inline-block',
+                  }}
+                >
+                  <FaPhoneAlt />
+                </span>
                 <span className="text-sm">+919390594407</span>
               </div>
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
-                <FaEnvelope className="mr-3 text-[#27bdb5]" />
+                <span
+                  className="mr-3"
+                  style={{
+                    background: 'linear-gradient(to bottom, #63342e, #d6ab88, #9a644a)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    display: 'inline-block',
+                  }}
+                >
+                  <FaEnvelope />
+                </span>
                 <span className="text-sm">ai@tools.in</span>
               </div>
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
-                <FaMapMarkerAlt className="mr-3 text-[#27bdb5]" />
+                <span
+                  className="mr-3"
+                  style={{
+                    background: 'linear-gradient(to bottom, #63342e, #d6ab88, #9a644a)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    display: 'inline-block',
+                  }}
+                >
+                  <FaMapMarkerAlt />
+                </span>
                 <span className="text-sm">{translations.footer_address || "India"}</span>
               </div>
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
-                <FaClock className="mr-3 text-[#27bdb5]" />
+                <span
+                  className="mr-3"
+                  style={{
+                    background: 'linear-gradient(to bottom, #63342e, #d6ab88, #9a644a)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    display: 'inline-block',
+                  }}
+                >
+                  <FaClock />
+                </span>
                 <span className="text-sm">{translations.footer_hours || "Mon - Fri: 9am - 6pm"}</span>
               </div>
             </div>

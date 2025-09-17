@@ -122,12 +122,15 @@ const AdminDashboard = () => {
 
   return (
     <div
-      className={`min-h-screen ${theme === 'dark' ? 'bg-[#181a19] text-white' : 'bg-white text-black'}`}
+      className={`min-h-screen flex ${theme === 'dark' ? 'bg-[#181a19] text-white' : 'bg-white text-black'}`}
       dir={isRTL ? 'rtl' : 'ltr'}
       style={isRTL ? { direction: 'rtl', textAlign: 'right' } : {}}
     >
+      {/* SIDEBAR REMOVED */}
+  {/* MAIN CONTENT */}
+  <div className="flex-1 ml-0">
       {/* SCROLLABLE CONTENT */}
-      <main className="p-6 md:p-8 space-y-10 pt-24">
+  <main className="p-6 md:p-8 space-y-10 pt-24">
         {/* HEADER */}
         <header className="flex items-center justify-between">
           <h1 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{translations?.admin_dashboard_title || 'Admin Dashboard'}</h1>
@@ -281,6 +284,7 @@ const AdminDashboard = () => {
           </motion.div>
         </section>
       </main>
+      </div>
     </div>
   );
 }

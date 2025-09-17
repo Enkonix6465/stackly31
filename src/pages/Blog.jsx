@@ -5,7 +5,7 @@ import healthcareImg from "../assets/AI in Healthcare- Real Case Studies.webp";
 import businessImg from "../assets/Building Custom AI Assistants for Business.png";
 import openSourceImg from "../assets/Open Source AI Projects to Watch.webp";
 import aiImg from '../assets/ai.webp';
-import heroVideo from "../assets/hero.mp4";
+import heroVideo from "../assets/bloghero (2).mp4";
 
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
