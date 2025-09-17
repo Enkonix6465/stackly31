@@ -6,11 +6,14 @@ import { Toaster } from 'react-hot-toast';
 import './index.css';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 
+import { LanguageProvider } from './context/LanguageContext.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <ThemeProvider>
-      <Toaster position="top-right" />
-      <App />
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider>
+        <Toaster position="top-right" />
+        <App />
+      </ThemeProvider>
+    </LanguageProvider>
   </BrowserRouter>
 );

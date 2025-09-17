@@ -2,6 +2,36 @@ import React, { createContext, useContext, useState } from "react";
 
 const translations = {
   english: {
+  // Admin Dashboard additional headings
+  services: "Services",
+  recent_orders: "Recent Orders",
+  analytics: "Analytics",
+  traffic_sources: "Traffic Sources",
+  weekly_signups: "Weekly Sign-ups",
+  // Service names for Admin Dashboard
+  service_ai_chatbots_assistants: "AI Chatbots & Assistants",
+  service_ai_code_assistants: "AI Code Assistants",
+  service_ai_voice_and_vedio_tools: "AI Voice & Video Tools",
+  service_automation_workflow_tools: "Automation Workflow Tools",
+  service_content_generation: "Content Generation",
+  service_data_analytics: "Data Analytics",
+  // Status translations for orders table
+  status_completed: "Completed",
+  status_in_progress: "In Progress",
+  status_pending: "Pending",
+  // Stat card label
+  support_tickets: "Support Tickets",
+  // Orders table empty state
+  no_orders_found: "No orders found.",
+  // User names for orders table
+  user_alice: "Alice",
+  user_bob: "Bob",
+  user_carol: "Carol",
+  // Admin Dashboard section
+  admin_dashboard_title: "Admin Dashboard",
+  active_services: "Active Services",
+  revenue_usd: "Revenue (USD)",
+  total_users: "Total Users",
   // Header services dropdown (custom order)
   header_service_content: "Content Generation",
   header_service_automation: "Automation Tools",
@@ -261,6 +291,36 @@ const translations = {
   ,cv_pricing_contact_sales: "Contact Sales"
   },
   arabic: {
+  // Admin Dashboard additional headings
+  services: "الخدمات",
+  recent_orders: "الطلبات الأخيرة",
+  analytics: "التحليلات",
+  traffic_sources: "مصادر الزيارات",
+  weekly_signups: "التسجيلات الأسبوعية",
+  // Service names for Admin Dashboard
+  service_ai_chatbots_assistants: "دردشة الذكاء الاصطناعي والمساعدون",
+  service_ai_code_assistants: "مساعدو الكود بالذكاء الاصطناعي",
+  service_ai_voice_and_vedio_tools: "أدوات الصوت والفيديو بالذكاء الاصطناعي",
+  service_automation_workflow_tools: "أدوات الأتمتة وسير العمل",
+  service_content_generation: "توليد المحتوى",
+  service_data_analytics: "البيانات والتحليلات",
+  // Status translations for orders table
+  status_completed: "مكتمل",
+  status_in_progress: "قيد التنفيذ",
+  status_pending: "قيد الانتظار",
+  // Stat card label
+  support_tickets: "تذاكر الدعم",
+  // Orders table empty state
+  no_orders_found: "لا توجد طلبات.",
+  // User names for orders table
+  user_alice: "أليس",
+  user_bob: "بوب",
+  user_carol: "كارول",
+  // Admin Dashboard section
+  admin_dashboard_title: "لوحة تحكم المدير",
+  active_services: "الخدمات النشطة",
+  revenue_usd: "الإيرادات (دولار)",
+  total_users: "إجمالي المستخدمين",
   // Header services dropdown (custom order)
   header_service_content: "توليد المحتوى",
   header_service_automation: "أدوات الأتمتة",
@@ -520,6 +580,36 @@ const translations = {
   ,cv_pricing_contact_sales: "تواصل مع المبيعات"
   },
   hebrew: {
+  // Admin Dashboard additional headings
+  services: "שירותים",
+  recent_orders: "הזמנות אחרונות",
+  analytics: "אנליטיקה",
+  traffic_sources: "מקורות תנועה",
+  weekly_signups: "הרשמות שבועיות",
+  // Service names for Admin Dashboard
+  service_ai_chatbots_assistants: "צ'אטבוטים ועוזרים חכמים",
+  service_ai_code_assistants: "עוזרי קוד בינה מלאכותית",
+  service_ai_voice_and_vedio_tools: "כלי קול ווידאו בינה מלאכותית",
+  service_automation_workflow_tools: "כלי אוטומציה וזרימת עבודה",
+  service_content_generation: "יצירת תוכן",
+  service_data_analytics: "נתונים וניתוחים",
+  // Status translations for orders table
+  status_completed: "הושלם",
+  status_in_progress: "בתהליך",
+  status_pending: "ממתין",
+  // Stat card label
+  support_tickets: "קריאות תמיכה",
+  // Orders table empty state
+  no_orders_found: "לא נמצאו הזמנות.",
+  // User names for orders table
+  user_alice: "אליס",
+  user_bob: "בוב",
+  user_carol: "קרול",
+  // Admin Dashboard section
+  admin_dashboard_title: "לוח ניהול",
+  active_services: "שירותים פעילים",
+  revenue_usd: "הכנסות (דולר)",
+  total_users: "סך המשתמשים",
   // Header services dropdown (custom order)
   header_service_content: "יצירת תוכן",
   header_service_automation: "כלי אוטומציה",

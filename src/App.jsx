@@ -83,11 +83,7 @@ function AppContent() {
 function App() {
   return (
     <RoleProvider>
-      <ThemeProvider>
-        <LanguageProvider>
-          <AppContent />
-        </LanguageProvider>
-      </ThemeProvider>
+      <AppContent />
     </RoleProvider>
   );
 }
