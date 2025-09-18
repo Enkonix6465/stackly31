@@ -237,11 +237,22 @@ const services = [
     </section>
     
       {/* Our Services Section - 2x3 Grid Cards */}
-  <section id="services-section" className="w-full py-24 px-4" style={{ background: 'white' }}>
+  <section id="services-section" className="w-full py-24 px-4" style={theme === 'dark' ? { background: 'black' } : { background: 'white' }}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, idx) => {
-            // Alternate backgrounds: even = gradient, odd = white
+            // Alternate backgrounds: even = gradient, odd = white (or in dark mode, white for odd)
             const isGradient = idx % 2 === 0;
+            const isDark = theme === 'dark';
+            const cardBg = isGradient
+              ? 'linear-gradient(90deg, #63342e 0%, #9a644a 100%)'
+              : isDark
+                ? 'white'
+                : 'black';
+            const cardText = isGradient
+              ? 'white'
+              : isDark
+                ? 'black'
+                : 'white';
             return (
               <div
                 key={service.id}
@@ -251,22 +262,27 @@ const services = [
                   borderBottomRightRadius: '8rem',
                   borderTopRightRadius: 0,
                   borderBottomLeftRadius: 0,
-                  background: isGradient ? 'rgb(219, 158, 111)' : 'black'
+                  background: cardBg
                 }}
               >
                 <div className="flex items-center gap-4 mb-4 relative z-10">
-                  <service.icon className={`text-3xl ${isGradient ? 'text-white' : 'text-[#312525]'}`} />
+                  <service.icon className={`text-3xl`} style={{ color: cardText }} />
                   <h3
-                    className={`font-bold text-2xl ${isGradient ? 'bg-clip-text text-transparent' : 'text-white'}`}
-                    style={isGradient ? {
-                      backgroundImage:
-                        'linear-gradient(to right, #63342e, #312525, #9a644a, #63342e, #312525)'
-                    } : {}}
+                    className={`font-bold text-2xl`}
+                    style={isGradient
+                      ? {
+                          backgroundImage: 'linear-gradient(to right, #63342e, #312525, #9a644a, #63342e, #312525)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          color: 'transparent'
+                        }
+                      : { color: cardText }}
                   >
                     {service.title[language]}
                   </h3>
                 </div>
-                <p className={`text-base ${isGradient ? 'text-white' : 'text-white'} mb-2 relative z-10`}>
+                <p className={`text-base mb-2 relative z-10`} style={{ color: cardText }}>
                   {service.description[language]}
                 </p>
                 {/* Learn More button removed as requested */}
@@ -566,7 +582,7 @@ const services = [
       </section>
 
       {/* Get Started with AI Today Section - Content Only */}
-  <section className="w-full py-24 px-4" style={{ background: 'white' }}>
+  <section className="w-full py-24 px-4" style={theme === 'dark' ? { background: 'black' } : { background: 'white' }}>
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center justify-center text-center gap-8">
             <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 leading-tight ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
@@ -584,7 +600,7 @@ const services = [
                   : 'Get Started with AI Today'}
               </span>
             </h2>
-            <p className={`text-lg mb-6 leading-relaxed max-w-2xl ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>
+            <p className={`text-lg mb-6 leading-relaxed max-w-2xl ${theme === 'dark' ? 'text-white' : 'text-gray-600'}`}>
               {language === 'arabic'
                 ? 'هل أنت مستعد لتطبيق حلول الذكاء الاصطناعي؟ سيرشدك فريقنا الخبير في كل خطوة، من التقييم الأولي إلى التكامل السلس والدعم المستمر. سواء كنت بحاجة إلى روبوتات دردشة أو تحليلات أو أتمتة، نقدم توصيات مخصصة لأهداف عملك.'
                 : language === 'hebrew'

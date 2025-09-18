@@ -275,13 +275,21 @@ const useCasesTranslations = {
 };
 const UseCasesSection = ({ theme, lang }) => {
   return (
-    <section className="py-20 px-6" style={{ background: 'white' }}>
+    <section
+      className="py-20 px-6"
+      style={{ background: theme === 'dark' ? 'black' : 'white' }}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-left">
-          <h2 className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
+          <h2
+            className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent"
+            style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}
+          >
             {useCasesTranslations.title[lang]}
           </h2>
-           <p className="text-lg text-white max-w-2xl mb-8 leading-relaxed">
+          <p
+            className={`text-lg max-w-2xl mb-8 leading-relaxed ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+          >
             {useCasesTranslations.desc[lang]}
           </p>
         </div>
@@ -420,14 +428,27 @@ const ctaTranslations = {
   desc: { en: 'Deliver instant, personalized support and automate customer interactions with intelligent AI chatbots and assistants.', ar: 'قدّم دعماً فورياً وشخصياً وحقق أتمتة للتفاعلات مع العملاء باستخدام روبوتات الدردشة والمساعدين الذكيين.', he: 'ספק תמיכה מיידית ומותאמת אישית ואוטומציה לאינטראקציות עם לקוחות בעזרת צ׳אטבוטים ועוזרים חכמים.' },
   button: { en: 'Launch Your Chatbot', ar: 'أطلق روبوت الدردشة الخاص بك', he: 'השק את הצ׳אטבוט שלך' }
 };
-const CTASection = ({ lang }) => (
-  <section className={`py-16 px-4 w-full`} style={{background: 'white'}}>
+const CTASection = ({ theme, lang }) => (
+  <section
+    className={`py-16 px-4 w-full`}
+    style={{ background: theme === 'dark' ? 'black' : 'white' }}
+  >
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-      <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">{ctaTranslations.title[lang]}</h2>
-      <p className={`text-lg mb-8 max-w-2xl text-black`}>
+      <h2
+        className={`text-4xl md:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-[#312525]'}`}
+      >
+        {ctaTranslations.title[lang]}
+      </h2>
+      <p
+        className={`text-lg mb-8 max-w-2xl ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+      >
         {ctaTranslations.desc[lang]}
       </p>
-      <a href="/contact" className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
+      <a
+        href="/contact"
+        className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white"
+        style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}
+      >
         {ctaTranslations.button[lang]}
       </a>
     </div>
@@ -445,7 +466,7 @@ const AIChatbotsAssistants = () => {
       <FeaturesBenefitsSection theme={theme} lang={lang} />
       <UseCasesSection theme={theme} lang={lang} />
       <PricingSection theme={theme} lang={lang} />
-      <CTASection lang={lang} />
+      <CTASection theme={theme} lang={lang} />
     </main>
   );
 };

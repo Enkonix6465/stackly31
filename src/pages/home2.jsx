@@ -840,7 +840,7 @@ const SecondHome = () => {
       {/* Impact Metrics Section */}
       <section
         className="py-16 px-4"
-        style={{ background: theme === 'dark' ? '#121212' : '#fff' }}
+        style={{ background: theme === 'dark' ? 'black' : '#fff' }}
       >
         <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
           <div>
@@ -915,7 +915,7 @@ const SecondHome = () => {
       {/* CTA Section  */}
       <section
         className="w-full pt-8 pb-16 px-4 flex flex-col items-center justify-center"
-        style={{ background: theme === 'dark' ? '#121212' : '#fff' }}
+        style={{ background: theme === 'dark' ? 'black' : '#fff' }}
       >
         <div className={`max-w-3xl w-full flex flex-col items-center text-center ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">

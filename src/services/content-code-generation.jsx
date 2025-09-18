@@ -269,7 +269,7 @@ const useCasesTranslations = {
 };
 const UseCasesSection = ({ theme, lang }) => {
   return (
-    <section className="py-20 px-6" style={{ background: 'white' }}>
+    <section className="py-20 px-6" style={theme === 'dark' ? { background: 'black' } : { background: 'white' }}>
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-left">
           <h2 className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
@@ -413,11 +413,11 @@ const ctaTranslations = {
   desc: { en: 'Generate high-quality articles, blogs, marketing copy, and more—faster than ever.', ar: 'أنشئ مقالات ومدونات ونصوص تسويقية عالية الجودة والمزيد—بسرعة غير مسبوقة.', he: 'צור מאמרים, בלוגים, טקסטים שיווקיים ועוד—מהר מתמיד.' },
   button: { en: 'Start Generating Content', ar: 'ابدأ في إنشاء المحتوى', he: 'התחל ליצור תוכן' }
 };
-const CTASection = ({ lang }) => (
-  <section className={`py-16 px-4 w-full`} style={{background: 'white'}}>
+const CTASection = ({ lang, theme }) => (
+  <section className={`py-16 px-4 w-full`} style={theme === 'dark' ? { background: 'black' } : { background: 'white' }}>
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
       <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">{ctaTranslations.title[lang]}</h2>
-      <p className={`text-lg mb-8 max-w-2xl text-black`}>
+      <p className={`text-lg mb-8 max-w-2xl ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         {ctaTranslations.desc[lang]}
       </p>
       <a href="/contact" className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
@@ -438,7 +438,7 @@ const ContentCodeGeneration = () => {
       <FeaturesBenefitsSection theme={theme} lang={lang} />
       <UseCasesSection theme={theme} lang={lang} />
       <PricingSection theme={theme} lang={lang} />
-      <CTASection lang={lang} />
+  <CTASection lang={lang} theme={theme} />
     </main>
   );
 };

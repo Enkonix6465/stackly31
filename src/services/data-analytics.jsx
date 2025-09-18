@@ -254,19 +254,30 @@ const UseCasesSection = ({ theme, translations }) => {
   ];
 
   return (
-    <section className="py-20 px-6" style={{ background: 'white' }}>
+    <section
+      className="py-20 px-6"
+      style={{ background: theme === 'dark' ? 'black' : 'white' }}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-left">
-          <h2 className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
+          <h2
+            className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent"
+            style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}
+          >
             {translations.cv_usecasesTitle || "Real-Life Use Cases & Applications"}
           </h2>
-           <p className="text-lg text-white max-w-2xl mb-8 leading-relaxed">
+          <p
+            className={`text-lg max-w-2xl mb-8 leading-relaxed ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+          >
             {translations.cv_usecasesDesc || "Discover how data & analytics is transforming decision-making for businesses, healthcare, and more.\nOur platform adapts to your needs, delivering insights and speed for any use case."}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {useCases.map((useCase, idx) => (
-            <div key={idx} className="w-full bg-[linear-gradient(to_right,_#63342e,_#312525,_#d6ab88,_#c58d6a,_#9a644a,_#63342e,_#312525)] rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105">
+            <div
+              key={idx}
+              className="w-full bg-[linear-gradient(to_right,_#63342e,_#312525,_#d6ab88,_#c58d6a,_#9a644a,_#63342e,_#312525)] rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105"
+            >
               <div className="w-20 h-20 rounded-full bg-black flex items-center justify-center mb-4 shadow-md">
                 <img src={useCase.icon} loading="lazy" alt={useCase.title} className="w-10 h-10 object-contain" />
               </div>
@@ -388,14 +399,27 @@ const PricingSection = ({ theme, translations }) => {
 }
 
 // Main Component
-const CTASection = ({ translations }) => (
-  <section className={`py-16 px-4 w-full`} style={{background: 'white'}}>
+const CTASection = ({ theme, translations }) => (
+  <section
+    className={`py-16 px-4 w-full`}
+    style={{ background: theme === 'dark' ? 'black' : 'white' }}
+  >
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-      <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">{translations.cv_ctaTitle || "Unlock the Power of Computer Vision"}</h2>
-      <p className={`text-lg mb-8 max-w-2xl text-black`}>
+      <h2
+        className={`text-4xl md:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-[#312525]'}`}
+      >
+        {translations.cv_ctaTitle || "Unlock the Power of Computer Vision"}
+      </h2>
+      <p
+        className={`text-lg mb-8 max-w-2xl ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+      >
         {translations.cv_ctaDesc || "Analyze images and videos, detect objects, automate inspections, and gain actionable insights with advanced computer vision solutions."}
-       </p>
-      <a href="/contact" className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
+      </p>
+      <a
+        href="/contact"
+        className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white"
+        style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}
+      >
         {translations.cv_ctaButton || "Start with Computer Vision"}
       </a>
     </div>
@@ -413,7 +437,7 @@ const DataAnalytics = () => {
       <BenefitsSection theme={theme} translations={translations} />
       <UseCasesSection theme={theme} translations={translations} />
       <PricingSection theme={theme} translations={translations} />
-      <CTASection translations={translations} />
+      <CTASection theme={theme} translations={translations} />
     </main>
   );
 };

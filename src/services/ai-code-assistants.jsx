@@ -226,7 +226,7 @@ const UseCasesSection = ({ theme, translations }) => {
   ];
 
   return (
-    <section className="py-20 px-6" style={{ background: 'white' }}>
+    <section className="py-20 px-6" style={theme === 'dark' ? { background: 'black' } : { background: 'white' }}>
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-left">
           <h2 className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
@@ -362,11 +362,11 @@ const plans = [
 };
 
 // Main Component
-const CTASection = ({ translations }) => (
-  <section className={`py-16 px-4 w-full`} style={{background: 'white'}}>
+const CTASection = ({ translations, theme }) => (
+  <section className={`py-16 px-4 w-full`} style={theme === 'dark' ? { background: 'black' } : { background: 'white' }}>
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
       <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">{translations.nlp_ctaTitle || "Enhance Your Apps with NLP"}</h2>
-      <p className={`text-lg mb-8 max-w-2xl text-black`}>
+      <p className={`text-lg mb-8 max-w-2xl ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         {translations.nlp_ctaDesc || "Unlock advanced language understanding, sentiment analysis, entity extraction, translation, and conversational AI for your business."}
        </p>
       <a href="/contact" className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
@@ -386,7 +386,7 @@ const AICodeAssistants = () => {
       <FeaturesBenefitsSection theme={theme} translations={translations} />
       <UseCasesSection theme={theme} translations={translations} />
       <PricingSection theme={theme} translations={translations} />
-      <CTASection translations={translations} />
+  <CTASection translations={translations} theme={theme} />
     </main>
   );
 };

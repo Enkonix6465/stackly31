@@ -227,13 +227,21 @@ const UseCasesSection = ({ theme, translations }) => {
   ];
 
   return (
-    <section className="py-20 px-6" style={{ background: 'white' }}>
+    <section
+      className="py-20 px-6"
+      style={{ background: theme === 'dark' ? 'black' : 'white' }}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-left">
-          <h2 className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}>
+          <h2
+            className="text-5xl font-extrabold mb-2 bg-clip-text text-transparent"
+            style={{ backgroundImage: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}
+          >
             {translations.da_usecasesTitle || "Real-Life Use Cases & Applications"}
           </h2>
-           <p className="text-lg text-white max-w-2xl mb-8 leading-relaxed">
+          <p
+            className={`text-lg max-w-2xl mb-8 leading-relaxed ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+          >
             {translations.da_usecasesDesc || "See how AI voice and video tools are revolutionizing content creation, communication, and accessibility for creators, educators, and businesses.\nOur platform adapts to your needs, delivering quality and speed for any use case."}
           </p>
         </div>
@@ -361,14 +369,27 @@ const PricingSection = ({ theme, translations }) => {
 };
 
 // Main Component
-const CTASection = ({ translations }) => (
-  <section className={`py-16 px-4 w-full`} style={{background: 'white'}}>
+const CTASection = ({ theme, translations }) => (
+  <section
+    className={`py-16 px-4 w-full`}
+    style={{ background: theme === 'dark' ? 'black' : 'white' }}
+  >
     <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-      <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#312525]">{translations.da_ctaTitle || "Unlock Insights with Data Analysis"}</h2>
-      <p className={`text-lg mb-8 max-w-2xl text-black`}>
+      <h2
+        className={`text-4xl md:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-[#312525]'}`}
+      >
+        {translations.da_ctaTitle || "Unlock Insights with Data Analysis"}
+      </h2>
+      <p
+        className={`text-lg mb-8 max-w-2xl ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+      >
         {translations.da_ctaDesc || "Discover hidden trends, forecast future outcomes, and make smarter decisions with AI-powered data analysis and forecasting."}
-       </p>
-      <a href="/contact" className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white" style={{background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)'}}>
+      </p>
+      <a
+        href="/contact"
+        className="inline-block font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200 text-white"
+        style={{ background: 'linear-gradient(to right, #63342e, #312525, #d6ab88, #c58d6a, #9a644a, #63342e, #312525)' }}
+      >
         {translations.da_ctaButton || "Start Analyzing Data"}
       </a>
     </div>
@@ -385,7 +406,7 @@ const AIVoiceAndVedioTools = () => {
       <FeaturesBenefitsSection theme={theme} translations={translations} />
       <UseCasesSection theme={theme} translations={translations} />
       <PricingSection theme={theme} translations={translations} />
-      <CTASection translations={translations} />
+      <CTASection theme={theme} translations={translations} />
     </main>
   );
 };
